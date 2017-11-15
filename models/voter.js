@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         }
         voter_currentHash : {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         voter_stake : {
             type: DataTypes.INTEGER,
