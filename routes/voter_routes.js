@@ -38,14 +38,26 @@ router.get("/api/voters/:address", (req, res) => {
 
 // Add a voter
 router.post("/api/voters", (req, res) => {
-    console.log(req.body);
-    voter.create({
-        voter_passphrase: req.body.passhprase,
-        voter_firstName: req.body.firstName,
-        voter_lastName: req.body.lastName,
-        voter_email: req.body.email
-    }).then(dbVoter => {
-        res.json(dbVoter);
+    let voterList = [];
+    voter.findAll().then(dbList => {
+        console.log(JSON.stringify(dbList, null, 2));
+        voterList = dbList.map((voter) => {
+            return voter.voter_address;
+        });
+        console.log(voterList);
+        console.log(req.body);
+        console.log( 'last element: ' + (parseInt((voterList[voterList.length - 1].split("")).slice(0, -1).join("")) + parseInt(1)) + 'L');
+        let address = (parseInt((voterList[voterList.length - 1].split("")).slice(0, -1).join("")) + parseInt(1)) + 'L';
+        console.log(address);
+        voter.create({
+            voter_address: address,
+            voter_passphrase: req.body.passphrase,
+            voter_firstName: req.body.firstName,
+            voter_lastName: req.body.lastName,
+            voter_email: req.body.email
+        }).then(dbVoter => {
+            res.json(dbVoter);
+        });
     });
 });
 
