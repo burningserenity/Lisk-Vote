@@ -1,0 +1,23 @@
+{
+  "name": "lisk_vote",
+  "version": "1.0.0",
+  "description": "Anonymous voting to be used with the Lisk SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "lisk",
+    "vote",
+    "anonymous",
+    "blockchain",
+    "postgres"
+  ],
+  "author": "Allison Liederman, David Pena, Nicholas Calaway",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.22.6"
+  }
+}
