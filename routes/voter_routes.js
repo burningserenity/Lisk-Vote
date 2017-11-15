@@ -72,12 +72,12 @@ router.delete("/api/voters/:address", (req, res) => {
     });
 });
 
-// Update a voter ---- This is only for updating first/last name, email, and/or username
+// Update a voter ---- This is only for updating first/last name, and/or email... neither password nor address can ever be changed.
 router.put("/api/voters", (req, res) => {
     voter.update(req.body,
         {
             where: {
-                address: req.body.address
+                voter_address: req.body.address
             }
         }).then(dbVoter => {
             res.json(dbVoter);
@@ -89,19 +89,6 @@ router.put("/api/voters/stake/:address", (req, res) => {
     voter.update({
         voter_stake: req.body.stake,
     },{
-        where: {
-            voter_address: req.params.address
-        }
-    }).then(dbVoter => {
-        res.json(dbVoter);
-    });
-});
-
-// Anonymise user per ballot
-router.put("/api/voters/anon/:address", (req, res) => {
-    voter.update({
-        voter_currenthash: req.body.currenthash
-    }, {
         where: {
             voter_address: req.params.address
         }
