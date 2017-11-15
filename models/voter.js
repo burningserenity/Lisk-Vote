@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
         voter_username : {
             type: DataTypes.STRING,
             allowNull: false
-        }
-        voter_currentHash : {
+        },
+        voter_currenthash : {
             type: DataTypes.STRING,
             allowNull: true
         },
@@ -22,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         voter_lastName : {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        voter_firstName : {
             type: DataTypes.STRING,
             allowNull: true
         },
