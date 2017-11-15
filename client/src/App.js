@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Heading from './Heading.js';
-import Nav from "./components/Nav/Nav"
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import OpenVotes from './pages/OpenVotes';
+import LiskVote from './pages/LiskVote';
+import NewUser from './pages/NewUser';
+import VoteResults from './pages/VoteResults';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-                <Nav />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const App = () =>
+	<Router>
+		<div>
+			<Nav />
+			<Switch>
+				<Route exact path="/" component={LiskVote} />
+				<Route exact path="/liskvote" component={LiskVote} />
+				<Route exact path="/newuser" component={NewUser} />
+				<Route exact path="/openvotes" component={OpenVotes} />
+				<Route exact path="/voteresults" component={VoteResults} />
+			</Switch>
+		</div>
+	</Router>;
 
 export default App;
