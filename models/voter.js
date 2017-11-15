@@ -2,11 +2,13 @@ module.exports = (sequelize, DataTypes) => {
     const Voter = sequelize.define("Voter", {
         voter_address : {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
-        voter_username : {
+        voter_passphrase : {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         voter_currenthash : {
             type: DataTypes.STRING,
