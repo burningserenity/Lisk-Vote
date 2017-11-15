@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
-app.use(express.static('node_modules'));
+app.use(express.static('node_modules/cirrus-ui/dist/cirrus.min.css'));
 app.use(express.static('public'));
 app.use(methodOverride("_method");
 
