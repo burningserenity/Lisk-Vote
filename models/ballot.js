@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
             allowNull: false
         },
-        ballot_user : {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
         ballot_active : {
             type: DataTypes.BOOLEAN,
             allowNull: false,
@@ -29,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     Ballot.associate = (models) => {
         Ballot.hasMany(models.Issue, {
             onDelete: "cascade"
+        });
+        Ballot.belongsToMany(models.Voter, {
+            through: 'Registration'
         });
     };
 

@@ -32,5 +32,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         }
     });
+
+    Voter.associate = (models) => {
+        Voter.belongsToMany(models.Ballot, {
+            through: 'Registration'
+        });
+    };
+
     return Voter;
 }
