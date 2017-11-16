@@ -1,7 +1,7 @@
-const express = require('express');
+// const express = require('express');
 const db = require('../models');
 
-const router = express.Router();
+const router = require("express").Router();
 const voter = db.Voter;
 
 /* Root */
