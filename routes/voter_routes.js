@@ -3,15 +3,16 @@ const db = require('../models');
 
 const router = require("express").Router();
 const voter = db.Voter;
+const path = require('path');
 
 /* Root */
 
-router.get("/", (req, res) => {
+/*router.get("/", (req, res) => {
     voter.findAll().then(dbVoter => {
         console.log(dbVoter);
         res.json(dbVoter);
     });
-});
+});*/
 
 
 /* API */
@@ -95,6 +96,11 @@ router.put("/api/voters/stake/:address", (req, res) => {
     }).then(dbVoter => {
         res.json(dbVoter);
     });
+});
+
+/*Catch all for React*/
+router.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/public/index.html'));
 });
 
 module.exports = router;

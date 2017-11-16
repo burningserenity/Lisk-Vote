@@ -25,7 +25,7 @@ app.use("/", voter_routes);
 
 console.log(`Listening on port ${port}...`);
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force: true}).then(() => {
     app.listen(port, () => {
         console.log(`Listening on port ${port}` );
     });

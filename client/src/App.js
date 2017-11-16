@@ -4,11 +4,12 @@ import OpenVotes from './pages/OpenVotes';
 import LiskVote from './pages/LiskVote';
 import NewUser from './pages/NewUser';
 import VoteResults from './pages/VoteResults';
+import Nav from './components/Grid/Nav'
 
 const App = () =>
 	<Router>
-		<div>
-			<Nav />
+        <div>
+            <Nav />
 			<Switch>
 				<Route exact path="/" component={LiskVote} />
 				<Route exact path="/liskvote" component={LiskVote} />
@@ -16,7 +17,7 @@ const App = () =>
 				<Route exact path="/openvotes" component={OpenVotes} />
 				<Route exact path="/voteresults" component={VoteResults} />
 			</Switch>
-		</div>
+        </div>
 	</Router>;
 
 export default App;
