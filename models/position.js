@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Position.associate = (models) => {
         Position.belongsTo(models.Issue, {
-            foreignKey: 'regarding',
-            targetKey: 'issue_name'
+            foreignKey: 'regarding'
         });
     };
 
