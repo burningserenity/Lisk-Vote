@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false
-        },
-        ballot_name : {
-            type: DataTypes.STRING,
-            allowNull: false
         }
     });
 
@@ -17,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         Issue.belongsTo(models.Ballot, {
             foreignKey: 'in_ballot',
             targetKey: 'ballot_name'
+        });
+        Issue.hasMany(models.Position, {
+            onDelete: "cascade"
         });
     };
 
