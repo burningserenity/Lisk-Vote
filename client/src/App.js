@@ -3,7 +3,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 // import OpenVotes from './pages/OpenVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
 import PropTypes from 'prop-types';
-// import NewUser from './pages/NewUser';
+import NewUser from './pages/NewUser/NewUser';
 // import VoteResults from './pages/VoteResults';
 
 class App extends Component {
@@ -30,8 +30,9 @@ class App extends Component {
 								<button onClick={this.test.bind(this)}>Get Router</button>*/}
 				<Switch>
 					<Route exact path="/" component={LiskVote} />
-					{/*
+
 						<Route exact path="/newuser" component={NewUser} />
+						{/*
 					<Route exact path="/openvotes" component={OpenVotes} />
 					<Route exact path="/voteresults" component={VoteResults} />
 				*/}
