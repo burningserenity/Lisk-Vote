@@ -1,4 +1,4 @@
-const router = require("express");
+const router = require("express").Router();
 const ballot = require("../models").Ballot;
 const registration = require("../models").Registration;
 const path = require('path');
@@ -99,3 +99,5 @@ router.put("/api/ballots/toggle/:id", (req, res) => {
         });
     });
 });
+
+module.exports = router;

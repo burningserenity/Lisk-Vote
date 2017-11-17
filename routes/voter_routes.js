@@ -2,18 +2,6 @@ const voter = require('../models').Voter;
 const router = require("express").Router();
 const path = require('path');
 
-/* Root */
-
-/*router.get("/", (req, res) => {
-    voter.findAll().then(dbVoter => {
-        console.log(dbVoter);
-        res.json(dbVoter);
-    });
-});*/
-
-
-/* API */
-
 // Select all voters
 router.get("/api/voters", (req, res) => {
     voter.findAll().then(dbVoter => {
@@ -93,11 +81,6 @@ router.put("/api/voters/stake/:address", (req, res) => {
     }).then(dbVoter => {
         res.json(dbVoter);
     });
-});
-
-/*Catch all for React*/
-router.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/public/index.html'));
 });
 
 module.exports = router;
