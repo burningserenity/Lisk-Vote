@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const ballot = require("../models").Ballot;
-const registration = require("../models").Registration;
-const path = require('path');
+const voter = require("../models").Voter;
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
@@ -54,7 +53,7 @@ router.put("/api/ballots/:id", (req, res) => {
     ballot.update({
         ballot_name: req.body.ballot_name,
         ballot_start: req.body.ballot_start,
-        ballot_expiration: req.body.expiration
+        ballot_expiration: req.body.ballot_expiration
     }, {
         where: {
             id: req.params.id
@@ -73,12 +72,15 @@ router.put("/api/ballots/register/:id", (req, res) => {
         }
     }).then(() => ballot.findOne({
         where: {
-            id: req.body.ballot_id
+            id: req.params.id
         }
-    })).then(() => voter.setBallot({
+    })).then(() => voter.setBallots({
         ballot_id: req.body.ballot_id,
         voter_id: req.body.voter_id
-    }));
+    })).then((dbRegistration) => {
+        console.log(dbRegistration);
+        res.json(dbRegistration);
+    });
 });
 
 // Activate or Deactivate ballot
@@ -97,6 +99,9 @@ router.put("/api/ballots/toggle/:id", (req, res) => {
                 id: req.params.id
             }
         });
+    }).then((dbToggle) => {
+        console.log(dbToggle);
+        res.json(dbToggle);
     });
 });
 

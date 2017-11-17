@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     
     Ballot.associate = (models) => {
         Ballot.hasMany(models.Issue, {
+            foreignKey: 'ballot_id',
             onDelete: "cascade"
         });
         Ballot.belongsToMany(models.Voter, {
