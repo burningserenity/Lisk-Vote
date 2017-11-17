@@ -5,14 +5,15 @@ module.exports = (sequelize, DataTypes) => {
         position_name : {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        position_tally : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
         }
     });
 
-    Position.associate = (models) => {
-        Position.belongsTo(models.Issue, {
-            foreignKey: 'regarding'
-        });
-    };
+    // Issue has many Positions
 
     return Position;
 }

@@ -1,9 +1,9 @@
+'use strict'
 
 module.exports = (sequelize, DataTypes) => {
     const Ballot = sequelize.define("Ballot", {
         ballot_name : {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false
         },
         ballot_active : {
@@ -19,6 +19,16 @@ module.exports = (sequelize, DataTypes) => {
         ballot_expiration : {
             type: 'TIMESTAMP',
             allowNull: true
+        },
+        ballot_registered_voters : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        ballot_casts : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
         }
     });
     
@@ -27,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "cascade"
         });
         Ballot.belongsToMany(models.Voter, {
-            through: 'Registration'
+            through: 'Registration',
+            foreignKey: 'voter_address'
         });
     };
 

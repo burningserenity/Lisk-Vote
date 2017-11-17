@@ -1,52 +1,52 @@
 -- For "Lunch Plan" ballot
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES ("Sandwiches", "What should we have for lunch?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES ('Sandwiches', 1, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES ("Coffee & Cigarettes", "What should we have for lunch?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES ('Coffee & Cigarettes', 1, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES ("Italian", "What should we have for lunch?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES ('Italian', 1, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES ("Starbucks", "Where should we eat lunch?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES ('Starbucks', 2, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES ("At work", "Where should we eat lunch?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES ('At work', 2, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES ("That great new Italian place by the mall", "Where should we eat lunch?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES ('That great new Italian place by the mall',  2, now(), now());
 
 -- For "Dinner Plan" ballot
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES("Pot Pie", "What should we have for dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES('Pot Pie', 3, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES("Italian", "What should we have for dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES('Italian', 3, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES("Big Mac", "What should we have for dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES('Big Mac', 3, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES("The park", "Where should we eat dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES('The park', 4, now(), now());
 
-INSERT INTO Positions (position_name, regarding)
-    VALUES("That great new Italian place by the mall", "Where should we eat dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt")
+    VALUES('That great new Italian place by the mall', 4, now(), now());
 
-INSERT INTO Positions (position_name, regarding) 
-    VALUES("McDonald's", "Where should we eat dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt") 
+    VALUES('McDonald''s', 4, now(), now());
 
-INSERT INTO Positions (position_name, regarding) 
-    VALUES("Yes", "Should we see a movie first?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt") 
+    VALUES('Yes', 5, now(), now());
 
-INSERT INTO Positions (position_name, regarding) 
-    VALUES("No", "Should we see a movie first?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt") 
+    VALUES('No', 5, now(), now());
 
-INSERT INTO Positions (position_name, regarding) 
-    VALUES("Mine", "Who's house should we go to after dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt") 
+    VALUES('Mine', 6, now(), now());
 
-INSERT INTO Positions (position_name, regarding) 
-    VALUES("Yours", "Who's house should we go to after dinner?");
+INSERT INTO "Positions" (position_name, "IssueId", "createdAt", "updatedAt") 
+    VALUES('Yours', 6, now(), now());
 

@@ -10,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Issue.associate = (models) => {
-        Issue.belongsTo(models.Ballot, {
-            foreignKey: 'in_ballot',
-            targetKey: 'ballot_name'
-        });
         Issue.hasMany(models.Position, {
             onDelete: "cascade"
         });
