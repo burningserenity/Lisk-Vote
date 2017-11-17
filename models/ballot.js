@@ -1,27 +1,8 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
     const Ballot = sequelize.define("Ballot", {
         ballot_name : {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ballot_issue : {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ballot_issue_position : {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ballot_issue_score : {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        ballot_cast_by : {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        ballot_user : {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -30,10 +11,36 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: true
         },
+        ballot_start : {
+            type: 'TIMESTAMP',
+            defaultValue: 'now()',
+            allowNull: false
+        },
         ballot_expiration : {
             type: 'TIMESTAMP',
             allowNull: true
+        },
+        ballot_registered_voters : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        ballot_casts : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
         }
     });
+    
+    Ballot.associate = (models) => {
+        Ballot.hasMany(models.Issue, {
+            onDelete: "cascade"
+        });
+        Ballot.belongsToMany(models.Voter, {
+            through: 'Registration',
+            foreignKey: 'voter_address'
+        });
+    };
+
     return Ballot;
 }
