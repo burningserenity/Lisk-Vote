@@ -4,12 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     const Issue = sequelize.define("Issue", {
         issue_name : {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false
         }
     });
 
     Issue.associate = (models) => {
+        // Ballot has many Issues
         Issue.hasMany(models.Position, {
             onDelete: "cascade"
         });
