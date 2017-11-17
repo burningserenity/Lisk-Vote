@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
-import Jumbotron from "../../components/Jumbotron/";
-
+import { Input, Jumbotron, JumboBtn } from "../../components/Jumbotron/";
+import { Link } from 'react-router-dom';
+import { Col, Row, Container } from "../../components/Grid/";
 
 class LiskVote extends Component {
-	state = {
-		password: ""
-	};
+	constructor() {
+		super();
+
+		this.state = {
+			voter_passphrase: ""
+		};
+	}
+
+	handleChange(e) {
+		let prop = e.target.id;
+		let change = {};
+
+		change[prop] = e.target.value;
+		this.setState(change);
+	}
+
 	render() {
+
 		return (
 			<Container fluid>
 				<Row>
 					<Col size="md-12">
 						<Jumbotron>
-							<input onChange={ event =>
-								this.setState({
-									password: event.target.value
-								})
-							}
-							/>
+							<h1>LiskVote</h1>
+							<Input onChange={this.handleChange.bind(this)} id="voter_passphrase" />
+							<JumboBtn />
+							<Link to="/newuser" style={{ float: "right" }}>New User</Link>
 						</Jumbotron>
-					</Col>
+						</Col>
 				</Row>
-				</Container>
-			);
+			</Container>
+		);
 	}
 }
 
