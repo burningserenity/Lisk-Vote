@@ -25,16 +25,18 @@ router.get("/api/issues/:ballot_id", (req, res) => {
 });
 
 router.put("/api/issues/:id", (req, res) => {
-    // Check to make sure ballot it belongs to isn't active?
-    issue.update({
-        issue_name: req.body.issue_name
-    }, {
+    issue.findOne({
         where: {
             id: req.params.id
-        }
-    }).then(dbIssue => {
-        console.log(dbIssue);
-        res.json(dbIssue);
+        },
+        include: [{model: Ballot}]
+    }).then((dbIssue) => {
+        if ( dbIssue.Ballot.ballot_active )
+            return res.json('Ballot is active');
+        
+        dbIssue.update({
+            issue_name: req.body.issue_name
+        }).then(() => res.json(dbIssue.Ballot) );
     });
 });
 

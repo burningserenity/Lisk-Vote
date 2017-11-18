@@ -12,14 +12,61 @@ router.get("/api/ballots", (req, res) => {
 
 // Select ballot by id
 router.get("/api/ballots/:id", (req, res) => {
+    
+    let ballot_with_items = {
+        issues: [],
+        positions: []
+    };
+    let i = 0;
+    let j = 0;
+
+    function fullLen(i, j, arr) {
+        j === arr.len ? posQuery(i, arr) : console.log(j);
+    };
+
+    function posQuery(i, arr) {
+        arr.getPositions(
+        ).then(positions => {
+            positions.forEach(position => {
+                ballot_with_items.positions.push(position);
+                isComplete(arr.length, i)
+            });
+        });
+    };
+
+    function isComplete(len, i, render) {
+        i === len ? res.json(render) : console.log(i); 
+    };
+
     ballot.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(dbBallot => {
+        ballot_with_items.ballot = dbBallot;
+        dbBallot.getIssues(
+        ).then(issues => {
+            issues.forEach(issue => {
+                ballot_with_items.issues.push(issue);
+                issue.getPositions(
+                ).then(positions => {
+                    j++;
+                    i += positions.length;
+                    fullLen(i, j, issues);
+                    });
+                });
+            });
+        });
+
+
+    /*ballot.findOne({
         where: {
             id: req.params.id
         }
     }).then(dbBallot => {
         console.log(dbBallot);
         res.json(dbBallot);
-    });
+    });*/
 });
 
 // Add new ballot
@@ -66,21 +113,7 @@ router.put("/api/ballots/:id", (req, res) => {
 
 // Register voters for ballot
 router.put("/api/ballots/register/:id", (req, res) => {
-    voter.findOne({
-        where: {
-            id: req.body.voter_id
-        }
-    }).then(() => ballot.findOne({
-        where: {
-            id: req.params.id
-        }
-    })).then(() => voter.setBallots({
-        ballot_id: req.body.ballot_id,
-        voter_id: req.body.voter_id
-    })).then((dbRegistration) => {
-        console.log(dbRegistration);
-        res.json(dbRegistration);
-    });
+    console.log(JSON.stringify(Ballot, null, 2));
 });
 
 // Activate or Deactivate ballot
