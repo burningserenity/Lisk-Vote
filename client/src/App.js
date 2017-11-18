@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 import OpenVotes from './pages/OpenVotes/OpenVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import NewUser from './pages/NewUser/NewUser';
 // import VoteResults from './pages/VoteResults';
 
