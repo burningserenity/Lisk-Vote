@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const ballot = require("../models").Ballot;
 const voter = require("../models").Voter;
+const issue = require("../models").Issue;
+const position = require("../models").Position;
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
@@ -13,60 +15,19 @@ router.get("/api/ballots", (req, res) => {
 // Select ballot by id
 router.get("/api/ballots/:id", (req, res) => {
     
-    let ballot_with_items = {
-        issues: [],
-        positions: []
-    };
-    let i = 0;
-    let j = 0;
-
-    function fullLen(i, j, arr) {
-        j === arr.len ? posQuery(i, arr) : console.log(j);
-    };
-
-    function posQuery(i, arr) {
-        arr.getPositions(
-        ).then(positions => {
-            positions.forEach(position => {
-                ballot_with_items.positions.push(position);
-                isComplete(arr.length, i)
-            });
-        });
-    };
-
-    function isComplete(len, i, render) {
-        i === len ? res.json(render) : console.log(i); 
-    };
-
     ballot.findOne({
         where: {
             id: req.params.id
-        }
+        },
+        include: [{
+            model: issue,
+            include: [{
+                model: position
+            }]
+        }]
     }).then(dbBallot => {
-        ballot_with_items.ballot = dbBallot;
-        dbBallot.getIssues(
-        ).then(issues => {
-            issues.forEach(issue => {
-                ballot_with_items.issues.push(issue);
-                issue.getPositions(
-                ).then(positions => {
-                    j++;
-                    i += positions.length;
-                    fullLen(i, j, issues);
-                    });
-                });
-            });
-        });
-
-
-    /*ballot.findOne({
-        where: {
-            id: req.params.id
-        }
-    }).then(dbBallot => {
-        console.log(dbBallot);
         res.json(dbBallot);
-    });*/
+    });
 });
 
 // Add new ballot
