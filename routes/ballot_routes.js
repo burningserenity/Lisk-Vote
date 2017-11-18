@@ -3,10 +3,18 @@ const ballot = require("../models").Ballot;
 const voter = require("../models").Voter;
 const issue = require("../models").Issue;
 const position = require("../models").Position;
+const registration = require("../models").Registration;
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
-    ballot.findAll().then(dbBallot => {
+    ballot.findAll({
+        include: [{
+            model: issue,
+            include: [{
+                model: position
+            }]
+        }]
+    }).then(dbBallot => {
         console.log(dbBallot);
         res.json(dbBallot);
     });
@@ -87,9 +95,11 @@ router.put("/api/ballots/register/:id", (req, res) => {
             }
         });
     }).then((resVoter) => {
+        console.log("The ballot is: \n" + JSON.stringify(selBallot, null, 2) + "\n");
+        console.log("The voter is: \n" + JSON.stringify(resVoter, null, 2) + "\n");
         return selBallot.addVoter(resVoter);
     }).then(dbRegistration => {
-        console.log(dbRegistration);
+        console.log("The switch is: \n" + JSON.stringify(dbRegistration, null, 2) + "\n");
         res.json(dbRegistration);
     });
 });
