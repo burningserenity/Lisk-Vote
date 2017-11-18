@@ -1,21 +1,6 @@
-// const express = require('express');
-const db = require('../models');
-
+const voter = require('../models').Voter;
 const router = require("express").Router();
-const voter = db.Voter;
 const path = require('path');
-
-/* Root */
-
-/*router.get("/", (req, res) => {
-    voter.findAll().then(dbVoter => {
-        console.log(dbVoter);
-        res.json(dbVoter);
-    });
-});*/
-
-
-/* API */
 
 // Select all voters
 router.get("/api/voters", (req, res) => {
@@ -62,7 +47,7 @@ router.post("/api/voters", (req, res) => {
     });
 });
 
-// Delete a voter
+// Delete a voter ---- not necessary to implement
 router.delete("/api/voters/:address", (req, res) => {
     voter.destroy({
         where: {
@@ -96,11 +81,6 @@ router.put("/api/voters/stake/:address", (req, res) => {
     }).then(dbVoter => {
         res.json(dbVoter);
     });
-});
-
-/*Catch all for React*/
-router.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/public/index.html'));
 });
 
 module.exports = router;

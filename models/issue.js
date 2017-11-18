@@ -4,14 +4,18 @@ module.exports = (sequelize, DataTypes) => {
     const Issue = sequelize.define("Issue", {
         issue_name : {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false
         }
     });
 
     Issue.associate = (models) => {
+        // Ballot has many Issues
+        Issue.belongsTo(models.Ballot, {
+            foreignKey: 'ballot_id'
+        });
         Issue.hasMany(models.Position, {
-            onDelete: "cascade"
+            onDelete: "cascade",
+            foreignKey: "issue_id"
         });
     };
 
