@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
     const Voter = sequelize.define("Voter", {
         voter_address : {
@@ -32,5 +34,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         }
     });
+
+    Voter.associate = (models) => {
+        Voter.belongsToMany(models.Ballot, {
+            through: 'Registration',
+            foreignKey: 'ballot_id'
+        });
+    };
+
     return Voter;
 }
