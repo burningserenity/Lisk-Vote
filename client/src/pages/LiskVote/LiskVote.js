@@ -30,11 +30,13 @@ class LiskVote extends Component {
 							<h1>LiskVote</h1>
 							<Input onChange={this.handleChange.bind(this)} id="voter_passphrase" />
 							<JumboBtn />
-							<Link to="/newuser" style={{ float: "right" }}>New User</Link>
+
 						</Jumbotron>
+
 						</Col>
 				</Row>
 			</Container>
+
 		);
 	}
 }

@@ -17,7 +17,7 @@ render() {
     Vote Results
   </div>
   <div className="card-body">
-    <h4 clasName="card-title">Here are the Results for the Ballot you selected</h4>
+    <h4 className="card-title">Here are the Results for the Ballot you selected</h4>
     <p className="card-text">All voters are kept annonymous to ensure validity of votes.</p>
 
   							<li>Hashed User 1</li>
