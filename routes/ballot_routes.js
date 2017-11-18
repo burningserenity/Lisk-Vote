@@ -74,7 +74,24 @@ router.put("/api/ballots/:id", (req, res) => {
 
 // Register voters for ballot
 router.put("/api/ballots/register/:id", (req, res) => {
-    console.log(JSON.stringify(Ballot, null, 2));
+    let selBallot = {};
+    ballot.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then((dbBallot) => {
+        selBallot = dbBallot;
+        return voter.findOne({
+            where: {
+                id: req.body.voter_id
+            }
+        });
+    }).then((resVoter) => {
+        return selBallot.addVoter(resVoter);
+    }).then(dbRegistration => {
+        console.log(dbRegistration);
+        res.json(dbRegistration);
+    });
 });
 
 // Activate or Deactivate ballot
