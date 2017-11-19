@@ -1,9 +1,9 @@
 const router = require("express").Router();
+const sequelize = require("../models").sequelize;
 const ballot = require("../models").Ballot;
 const voter = require("../models").Voter;
 const issue = require("../models").Issue;
 const position = require("../models").Position;
-const registration = require("../models").Registration;
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
@@ -22,7 +22,7 @@ router.get("/api/ballots", (req, res) => {
 
 // Select ballot by id
 router.get("/api/ballots/:id", (req, res) => {
-    
+
     ballot.findOne({
         where: {
             id: req.params.id
@@ -83,24 +83,40 @@ router.put("/api/ballots/:id", (req, res) => {
 // Register voters for ballot
 router.put("/api/ballots/register/:id", (req, res) => {
     let selBallot = {};
-    ballot.findOne({
-        where: {
-            id: req.params.id
-        }
-    }).then((dbBallot) => {
-        selBallot = dbBallot;
-        return voter.findOne({
+    let registration = {};
+    sequelize.transaction().then(go => {
+        return ballot.findOne({
             where: {
-                id: req.body.voter_id
+                id: req.params.id
             }
+        }).then((dbBallot) => {
+            selBallot = dbBallot;
+            return voter.findOne({
+                where: {
+                    id: req.body.voter_id
+                }
+            });
+        }).then((resVoter) => {
+            return selBallot.addVoter(resVoter);
+        }).then(dbRegistration => {
+            return registration = dbRegistration;
+        }).then(() => {
+            ballot.update({
+                ballot_registered_voters: selBallot.ballot_registered_voters + 1
+            }, {
+                where: {
+                    id: selBallot.id
+                }
+            });
+        }).then(() => {
+            go.commit();
+            console.log("Committing transaction...");
+        }).catch(err => {
+            go.rollback();
+            console.error("Transaction failed: ", err)
         });
-    }).then((resVoter) => {
-        console.log("The ballot is: \n" + JSON.stringify(selBallot, null, 2) + "\n");
-        console.log("The voter is: \n" + JSON.stringify(resVoter, null, 2) + "\n");
-        return selBallot.addVoter(resVoter);
-    }).then(dbRegistration => {
-        console.log("The switch is: \n" + JSON.stringify(dbRegistration, null, 2) + "\n");
-        res.json(dbRegistration);
+    }).then(() => {
+        res.json(registration);
     });
 });
 
