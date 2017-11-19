@@ -38,6 +38,24 @@ router.get("/api/ballots/:id", (req, res) => {
     });
 });
 
+// Select all ballots a voter is registered for
+router.get("/api/ballots/registered/:voter_id", (req, res) => {
+    let voterBallots = {};
+    sequelize.transaction().then(go => {
+        return voter.findOne({
+            where: {
+                id: req.params.voter_id,
+            }
+        }).then(dbVoter => {
+            return dbVoter.getBallots();
+        }).then(dbRegistration => {
+            voterBallot = dbRegistration;
+            console.log(dbRegistration);
+        }).then(() => go.commit())
+          .catch(err => console.error("Transaction failed: ", err));
+    }).then(() => res.json(voterBallot));
+});
+
 // Add new ballot
 router.post("/api/ballots", (req, res) => {
     ballot.create({
