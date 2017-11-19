@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const issue = require("../models").Issue;
+const ballot = require("../models").Ballot;
 
 // Create an issue to vote on
 router.post("/api/issues", (req, res) => {
@@ -24,31 +25,43 @@ router.get("/api/issues/:ballot_id", (req, res) => {
     });
 });
 
+// Update and issue
 router.put("/api/issues/:id", (req, res) => {
     issue.findOne({
         where: {
             id: req.params.id
         },
-        include: [{model: Ballot}]
+        include: [{model: ballot}]
     }).then((dbIssue) => {
         if ( dbIssue.Ballot.ballot_active )
-            return res.json('Ballot is active');
+            return res.json(`Cannot update issue ${dbIssue.id}; ballot is active.`);
+
         
         dbIssue.update({
             issue_name: req.body.issue_name
-        }).then(() => res.json(dbIssue.Ballot) );
+        }).then(() => res.json(dbIssue) );
     });
 });
 
+// Delete an issue
 router.delete("/api/issues/:id", (req, res) => {
-    // Check to make sure ballot it belongs to isn't active?
-    issue.destroy({
+    issue.findOne({
         where: {
             id: req.params.id
-        }
+        },
+        include:[{model: ballot}]
     }).then(dbIssue => {
-        console.log(dbIssue);
-        res.json(dbIssue);
+        if (dbIssue.Ballot.ballot_active)
+            return res.json(`Cannot delete issue ${dbIssue.id}; ballot is active`); 
+
+        dbIssue.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(dbIssue => {
+                console.log(dbIssue);
+                res.json(dbIssue);
+        });
     });
 });
 
