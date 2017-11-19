@@ -47,7 +47,14 @@ router.get("/api/ballots/registered/:voter_id", (req, res) => {
                 id: req.params.voter_id,
             }
         }).then(dbVoter => {
-            return dbVoter.getBallots();
+            return dbVoter.getBallots({
+                include: [{
+                    model: issue,
+                    include: [{
+                        model: position
+                    }]
+                }]
+            });
         }).then(dbRegistration => {
             voterBallot = dbRegistration;
             console.log(dbRegistration);
