@@ -2,138 +2,55 @@ import React, { Component } from 'react';
 import { Col, Row, Container } from "../../components/Grid/";
 import API from "../../utils/API";
 import { BallotCards, BallotBtn } from "../../components/BallotCards/";
+import "./OpenVotes.css";
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import  { Link } from 'react-router-dom';
 
 
 class OpenVotes extends Component {
-/*		state = {
-			ballots: [
-			validVotes: "",
-			title: "",
-			description: ""
-			]
-		}
-		*/
+		state = {
+			ballots: [],
+			ballot_name: "",
+			ballot_active: "",
+			ballot_expiration: ""
+		};
 
-/*
 	componentDidMount() {
 		this.loadBallots();
 	}
-	*/
 
-/*
 	loadBallots = () => {
 		API.getBallots()
 			.then( res =>
-				this.setState({data: res.data, validVotes:"", title:"", description:""})
+				this.setState({ ballots: res.data, ballot_name:"", ballot_active:"", ballot_expiration:"" })
 				)
 			.catch(err => console.log(err));
 	};
-*/
+
 
 	render() {
 		return (
-			<Container fluid>
-			<h1 style={{ fontSize: 72 }}>These are all the Open Ballots</h1>
-				<Col size="md-12">
-				<Row>
-	{/*				<BallotCard /> */}
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-
-	</Row>
-	<Row>
-	<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-	</Row>
-	<Row>
-	<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-<Col size="md-4">
-<div className="card bg-light mb-3">
-  	<div className="card-header">I am a Ballot</div>
-  		<div className="card-body">
-   			 <h4 className="card-title">Light card title</h4>
-    				<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    				<BallotBtn />
-  		</div>
-</div>
-</Col>
-	</Row>
-</Col>
+			<Container>
+      <Row>
+<Col size="md-12">
+              <h1>Ballots</h1>
+            {this.state.ballots.length ? (
+              <ListGroup>
+                {this.state.ballots.map(ballot => (
+                  <ListGroupItem key={ballot.id}>
+                    <Link to={"/openvotes/" + ballot.id}>
+                      <strong>
+                        {ballot.ballot_name} Expires {ballot.ballot_expiration}
+                      </strong>
+                    </Link>
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+            ) : (
+              <h3>No Results to Display</h3>
+            )}
+          </Col>
+        </Row>
 			</Container>
 			);
 	}

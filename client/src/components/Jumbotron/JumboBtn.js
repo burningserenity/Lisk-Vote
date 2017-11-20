@@ -7,9 +7,8 @@ export const JumboBtn = props =>
     {props.children}
     Gain Entry
   </button>
-
-  <Link className="btn btn-success" to="/newuser" style={{ color: "white",
-                                                        padding: "8px"}}>
+  <Link to="/newuser" style={{ float: "right" }}>
   New User
   </Link>
+
   </div>;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, Jumbotron, JumboBtn } from "../../components/Jumbotron/";
 import { Link } from 'react-router-dom';
 import { Col, Row, Container } from "../../components/Grid/";
+import "./LiskVote.css"
 
 class LiskVote extends Component {
 	constructor() {
@@ -27,7 +28,7 @@ class LiskVote extends Component {
 				<Row>
 					<Col size="md-12">
 						<Jumbotron>
-							<h1>LiskVote</h1>
+							<h1>LivBold</h1>
 							<Input onChange={this.handleChange.bind(this)} id="voter_passphrase" />
 							<JumboBtn />
 
