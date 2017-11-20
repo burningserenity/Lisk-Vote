@@ -17,7 +17,9 @@ class OpenVotes extends Component {
 		};
 
 	componentDidMount() {
-        axios.get('http://127.0.0.1:7000/api/ballots');
+        axios.get('/api/ballots').then(ballots => {
+            console.log(JSON.stringify(ballots, null, 2));
+        });
 	}
 
 	loadBallots = () => {

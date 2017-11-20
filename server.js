@@ -24,7 +24,7 @@ app.use(express.static('client/build'));
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
     var oneof = false;
     if(req.headers.origin) {
         res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
     else {
         next();
     }
-});
+});*/
 
 
 app.use("/", voter_routes, ballot_routes, issue_routes);
