@@ -25,7 +25,7 @@ router.get("/api/issues/:ballot_id", (req, res) => {
     });
 });
 
-// Update and issue
+// Update an issue
 router.put("/api/issues/:id", (req, res) => {
     issue.findOne({
         where: {
