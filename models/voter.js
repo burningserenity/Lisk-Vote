@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     Voter.associate = (models) => {
         Voter.belongsToMany(models.Ballot, {
             through: 'Registration',
-            foreignKey: 'ballot_id'
+            foreignKey: 'voter_id'
         });
     };
 

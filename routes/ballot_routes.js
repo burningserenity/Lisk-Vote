@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const sequelize = require("../models").sequelize;
 const ballot = require("../models").Ballot;
 const voter = require("../models").Voter;
 const issue = require("../models").Issue;
@@ -6,7 +7,14 @@ const position = require("../models").Position;
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
-    ballot.findAll().then(dbBallot => {
+    ballot.findAll({
+        include: [{
+            model: issue,
+            include: [{
+                model: position
+            }]
+        }]
+    }).then(dbBallot => {
         console.log(dbBallot);
         res.json(dbBallot);
     });
@@ -14,7 +22,7 @@ router.get("/api/ballots", (req, res) => {
 
 // Select ballot by id
 router.get("/api/ballots/:id", (req, res) => {
-    
+
     ballot.findOne({
         where: {
             id: req.params.id
@@ -28,6 +36,31 @@ router.get("/api/ballots/:id", (req, res) => {
     }).then(dbBallot => {
         res.json(dbBallot);
     });
+});
+
+// Select all ballots a voter is registered for
+router.get("/api/ballots/registered/:voter_id", (req, res) => {
+    let voterBallots = {};
+    sequelize.transaction().then(go => {
+        return voter.findOne({
+            where: {
+                id: req.params.voter_id,
+            }
+        }).then(dbVoter => {
+            return dbVoter.getBallots({
+                include: [{
+                    model: issue,
+                    include: [{
+                        model: position
+                    }]
+                }]
+            });
+        }).then(dbRegistration => {
+            voterBallot = dbRegistration;
+            console.log(dbRegistration);
+        }).then(() => go.commit())
+          .catch(err => console.error("Transaction failed: ", err));
+    }).then(() => res.json(voterBallot));
 });
 
 // Add new ballot
@@ -74,7 +107,42 @@ router.put("/api/ballots/:id", (req, res) => {
 
 // Register voters for ballot
 router.put("/api/ballots/register/:id", (req, res) => {
-    console.log(JSON.stringify(Ballot, null, 2));
+    let selBallot = {};
+    let registration = {};
+    sequelize.transaction().then(go => {
+        return ballot.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then((dbBallot) => {
+            selBallot = dbBallot;
+            return voter.findOne({
+                where: {
+                    id: req.body.voter_id
+                }
+            });
+        }).then((resVoter) => {
+            return selBallot.addVoter(resVoter);
+        }).then(dbRegistration => {
+            return registration = dbRegistration;
+        }).then(() => {
+            ballot.update({
+                ballot_registered_voters: selBallot.ballot_registered_voters + 1
+            }, {
+                where: {
+                    id: selBallot.id
+                }
+            });
+        }).then(() => {
+            go.commit();
+            console.log("Committing transaction...");
+        }).catch(err => {
+            go.rollback();
+            console.error("Transaction failed: ", err)
+        });
+    }).then(() => {
+        res.json(registration);
+    });
 });
 
 // Activate or Deactivate ballot
