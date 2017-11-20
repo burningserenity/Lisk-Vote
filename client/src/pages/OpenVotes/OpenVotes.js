@@ -5,7 +5,6 @@ import { BallotCards, BallotBtn } from "../../components/BallotCards/";
 import "./OpenVotes.css";
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
-import axios from 'axios';
 
 
 class OpenVotes extends Component {
@@ -17,16 +16,15 @@ class OpenVotes extends Component {
 		};
 
 	componentDidMount() {
-        axios.get('/api/ballots').then(ballots => {
-            console.log(JSON.stringify(ballots, null, 2));
-        });
+		this.loadBallots();
 	}
 
 	loadBallots = () => {
 		API.getBallots()
-			.then( res =>
+			.then( res => {
+                console.log(JSON.stringify(res, null, 2));
 				this.setState({ ballots: res.data, ballot_name:"", ballot_active:"", ballot_expiration:"" })
-				)
+            })
 			.catch(err => console.log(err));
 	};
 
