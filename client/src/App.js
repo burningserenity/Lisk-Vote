@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Switch} from 'react-router-dom';
+import  { BrowserRouter, Router, Route, Switch } from 'react-router-dom';
 import OpenVotes from './pages/OpenVotes/OpenVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
 import NewUser from './pages/NewUser/NewUser';
 import VoteResults from './pages/VoteResults/VoteResults';
-import Nav from "./components/Nav";
+import NavBar from "./components/Nav";
+
 
 
 class App extends Component {
@@ -26,7 +27,7 @@ class App extends Component {
 	render() {
 		return(
 			<div>
-				<Nav />
+				<NavBar />
 				<Switch>
 					<Route exact path="/" component={LiskVote} />
 

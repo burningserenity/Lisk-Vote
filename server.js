@@ -31,7 +31,7 @@ app.get("*", (req, res) => {
 
 console.log(`Listening on port ${port}...`);
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
     app.listen(port, () => {
         console.log(`Listening on port ${port}` );
     });
