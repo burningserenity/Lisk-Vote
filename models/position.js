@@ -13,7 +13,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    // Issue has many Positions
+    Position.associate = (models) => {
+        // Issue has many Positions
+        Position.belongsTo(models.Issue, {
+            foreignKey: "issue_id"
+        });
+    };
 
     return Position;
 }
