@@ -5,6 +5,7 @@ import { BallotCards, BallotBtn } from "../../components/BallotCards/";
 import "./OpenVotes.css";
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 class OpenVotes extends Component {
@@ -16,7 +17,7 @@ class OpenVotes extends Component {
 		};
 
 	componentDidMount() {
-		this.loadBallots();
+        axios.get('http://127.0.0.1:7000/api/ballots');
 	}
 
 	loadBallots = () => {

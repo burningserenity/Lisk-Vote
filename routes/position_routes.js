@@ -14,13 +14,19 @@ router.post("/api/positions", (req, res) => {
     });
 });
 
+// Get all positions belonging to an issue
 router.get("/api/issues/:issue_id", (req, res) => {
     position.findAll({
         where: {
             issue_id: req.params.issue_id
-        }
+        },
+        include: [{
+            model: issue
+        }]
     }).then(dbPosition => {
         console.log(dbPosition);
         res.json(dbPosition)
     });
 });
+
+

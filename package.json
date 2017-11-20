@@ -18,6 +18,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "cirrus-ui": "^0.5.31",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "method-override": "^2.3.10",
     "pg": "^7.4.0",
