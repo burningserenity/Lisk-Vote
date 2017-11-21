@@ -12,22 +12,18 @@ class NavBar extends Component {
 
   render() {
     return(
-    <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
+    <Navbar inverse>
     <LinkContainer to="/">
       <Navbar.Brand>
         LivBold
       </Navbar.Brand>
       </LinkContainer>
-      <Navbar.Toggle />
-    </Navbar.Header>
 
       <Nav pullRight>
-<LinkContainer to="/newuser">
+    <LinkContainer to="/newuser">
         <NavItem eventKey={1} href="#">New User</NavItem>
         </LinkContainer>
      </Nav>
-
   </Navbar>
     );
   }
