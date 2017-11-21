@@ -4,6 +4,9 @@ import OpenVotes from './pages/OpenVotes/OpenVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
 import NewUser from './pages/NewUser/NewUser';
 import VoteResults from './pages/VoteResults/VoteResults';
+import NavBar from "./components/Nav";
+import { footer } from "react-bootstrap";
+
 
 
 
@@ -26,6 +29,8 @@ class App extends Component {
 	render() {
 		return(
 			<div>
+
+				<NavBar />
 				<Switch>
 					<Route exact path="/" component={LiskVote} />
 
