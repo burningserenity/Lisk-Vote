@@ -3,6 +3,7 @@ import { FormBtn, Input } from "../../components/Form/";
 import { Col, Row, Container } from "../../components/Grid/";
 import { Link } from "react-router-dom";
 import { Jumbotron } from "../../components/Jumbotron";
+import axios from "axios";
 
 class NewUser extends Component {
 	constructor() {
@@ -32,15 +33,16 @@ handleInputChange = e => {
 };
 
 
-// handleFormSubmit = e => {
-// 	event.preventDefault();
+ handleFormSubmit(e) {
+ 	e.preventDefault();
 
-// if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
-// ----->> Blah Blah Blah Save User information <<-----
-// 	.then(res => this.Blah Blah Blah Render new page <<-----)
-// 	.catch(err => console.log(err));
-// 	}
-// };
+ if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
+     let submitArr = [this.state.voter_firstName, this.state.voter_lastName, this.state.voter_passphrase, this.state.voter_email];
+     console.log(submitArr);
+     axios.post('/api/voters', {firstName: submitArr[0], lastName: submitArr[1], passphrase: submitArr[2], email: submitArr[3]}).then(res => res.redirect('/openvotes'))
+ 	                                     .catch(err => console.log(err));
+ 	}
+};
 
 
 	render() {
@@ -81,7 +83,7 @@ handleInputChange = e => {
 								name="voter_passphrase"
 								placeholder="Passphrase (Required)"
 								/>
-								<FormBtn />
+								<FormBtn onClick={this.handleFormSubmit.bind(this)}/>
 						</form>
 					</Col>
 					</Col>
