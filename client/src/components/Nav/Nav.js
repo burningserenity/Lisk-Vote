@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Nav.css";
 import { Navbar, Nav, MenuItem, NavDropdown, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 
 class NavBar extends Component {
@@ -9,13 +10,15 @@ class NavBar extends Component {
     console.log('The link was clicked');
   };
 
-  reander() {
+  render() {
     return(
     <Navbar inverse collapseOnSelect>
     <Navbar.Header>
+    <LinkContainer to="/">
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        LivBold
       </Navbar.Brand>
+      </LinkContainer>
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
@@ -31,8 +34,10 @@ class NavBar extends Component {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
-        <NavItem eventKey={1} href="#" onClick= {handleClick}>New User</NavItem>
-      </Nav>
+<LinkContainer to="/newuser">
+        <NavItem eventKey={1} href="#">New User</NavItem>
+        </LinkContainer>
+     </Nav>
     </Navbar.Collapse>
   </Navbar>
     );
