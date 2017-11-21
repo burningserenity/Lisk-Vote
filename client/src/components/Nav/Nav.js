@@ -21,14 +21,13 @@ class NavBar extends Component {
       </LinkContainer>
       <Navbar.Toggle />
     </Navbar.Header>
-    <Navbar.Collapse>
 
       <Nav pullRight>
 <LinkContainer to="/newuser">
         <NavItem eventKey={1} href="#">New User</NavItem>
         </LinkContainer>
      </Nav>
-    </Navbar.Collapse>
+
   </Navbar>
     );
   }
