@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
         Position.belongsTo(models.Issue, {
             foreignKey: "issue_id"
         });
+        Position.belongsTo(models.Ballot, {
+            foreignKey: "ballot_id"
+        });
     };
 
     return Position;

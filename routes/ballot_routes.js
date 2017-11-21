@@ -56,11 +56,11 @@ router.get("/api/ballots/registered/:voter_id", (req, res) => {
                 }]
             });
         }).then(dbRegistration => {
-            voterBallot = dbRegistration;
+            voterBallots = dbRegistration;
             console.log(dbRegistration);
         }).then(() => go.commit())
           .catch(err => console.error("Transaction failed: ", err));
-    }).then(() => res.json(voterBallot));
+    }).then(() => res.json(voterBallots));
 });
 
 // Add new ballot
@@ -164,6 +164,52 @@ router.put("/api/ballots/toggle/:id", (req, res) => {
     }).then((dbToggle) => {
         console.log(dbToggle);
         res.json(dbToggle);
+    });
+});
+
+// Cast a vote
+router.put("/api/ballots/vote/:ballot_id", (req, res) => {
+    sequelize.transaction().then(go => {
+        let voting = {};
+        let election = {};
+        return voter.findOne({
+            where: {
+                // This should be replaced with session token
+                id: req.body.voter_id
+            }
+        }).then(currVoter => {
+            voting = currVoter;
+            return currVoter.getBallots({
+                where: {
+                    id: req.params.ballot_id
+                }
+            });
+        }).then(voterBallots => {
+            if (voterBallots == "") {
+                go.rollback();
+                console.error(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`);
+                res.json(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`)
+            }
+            election = voterBallots;
+            return req.body.position.forEach(currPosition => {
+                console.log(currPosition);
+                position.findOne({
+                    where: {
+                        id: currPosition
+                    }
+                }).then(found => {
+                    found.update({
+                        position_tally: (parseInt(found.position_tally) + parseInt(voting.voter_stake))    
+                    });
+                });
+            });
+        }).then(() => {
+            return voting.removeBallot(election);
+        }).then(() => go.commit())
+          .catch(err => console.error("Ballot cast failed: ", err));
+    }).then(dbCast => {
+        console.log(dbCast);
+        res.json(dbCast);
     });
 });
 
