@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export const JumboBtn = props =>
 <div>
@@ -7,8 +7,5 @@ export const JumboBtn = props =>
     {props.children}
     Gain Entry
   </button>
-  <Link to="/newuser" style={{ float: "right" }}>
-  New User
-  </Link>
 
   </div>;

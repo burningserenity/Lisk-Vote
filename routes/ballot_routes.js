@@ -4,6 +4,24 @@ const ballot = require("../models").Ballot;
 const voter = require("../models").Voter;
 const issue = require("../models").Issue;
 const position = require("../models").Position;
+const faker = require('faker');
+
+ballot.findAll().then(ballots => console.log(ballots));
+
+// let count = 30;
+
+// while ( count-- ) {
+//     ballot.create({
+//         ballot_name: faker.name.firstName(),
+//         ballot_active: true,
+//         ballot_start: faker.date.past(),
+//         ballot_expiration: faker.date.future(),
+//         ballot_registered_voters: 1
+//     })
+//     .then(result => console.log(console.log(result)))
+//     .catch(err => console.log(err));
+// }
+
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
@@ -56,11 +74,11 @@ router.get("/api/ballots/registered/:voter_id", (req, res) => {
                 }]
             });
         }).then(dbRegistration => {
-            voterBallots = dbRegistration;
+            voterBallot = dbRegistration;
             console.log(dbRegistration);
         }).then(() => go.commit())
           .catch(err => console.error("Transaction failed: ", err));
-    }).then(() => res.json(voterBallots));
+    }).then(() => res.json(voterBallot));
 });
 
 // Add new ballot
@@ -164,52 +182,6 @@ router.put("/api/ballots/toggle/:id", (req, res) => {
     }).then((dbToggle) => {
         console.log(dbToggle);
         res.json(dbToggle);
-    });
-});
-
-// Cast a vote
-router.put("/api/ballots/vote/:ballot_id", (req, res) => {
-    sequelize.transaction().then(go => {
-        let voting = {};
-        let election = {};
-        return voter.findOne({
-            where: {
-                // This should be replaced with session token
-                id: req.body.voter_id
-            }
-        }).then(currVoter => {
-            voting = currVoter;
-            return currVoter.getBallots({
-                where: {
-                    id: req.params.ballot_id
-                }
-            });
-        }).then(voterBallots => {
-            if (voterBallots == "") {
-                go.rollback();
-                console.error(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`);
-                res.json(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`)
-            }
-            election = voterBallots;
-            return req.body.position.forEach(currPosition => {
-                console.log(currPosition);
-                position.findOne({
-                    where: {
-                        id: currPosition
-                    }
-                }).then(found => {
-                    found.update({
-                        position_tally: (parseInt(found.position_tally) + parseInt(voting.voter_stake))    
-                    });
-                });
-            });
-        }).then(() => {
-            return voting.removeBallot(election);
-        }).then(() => go.commit())
-          .catch(err => console.error("Ballot cast failed: ", err));
-    }).then(dbCast => {
-        console.log(dbCast);
-        res.json(dbCast);
     });
 });
 
