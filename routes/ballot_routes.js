@@ -6,21 +6,21 @@ const issue = require("../models").Issue;
 const position = require("../models").Position;
 const faker = require('faker');
 
-ballot.findAll().then(ballots => console.log(ballots));
+// ballot.findAll().then(ballots => console.log(ballots));
 
-// let count = 30;
+let count = 30;
 
-// while ( count-- ) {
-//     ballot.create({
-//         ballot_name: faker.name.firstName(),
-//         ballot_active: true,
-//         ballot_start: faker.date.past(),
-//         ballot_expiration: faker.date.future(),
-//         ballot_registered_voters: 1
-//     })
-//     .then(result => console.log(console.log(result)))
-//     .catch(err => console.log(err));
-// }
+while ( count-- ) {
+    ballot.create({
+        ballot_name: faker.name.firstName(),
+        ballot_active: true,
+        ballot_start: faker.date.past(),
+        ballot_expiration: faker.date.future(),
+        ballot_registered_voters: 1
+    })
+    .then(result => console.log(console.log(result)))
+    .catch(err => console.log(err));
+}
 
 
 // Select all ballots
