@@ -22,9 +22,10 @@ class OpenVotes extends Component {
 
 	loadBallots = () => {
 		API.getBallots()
-			.then( res =>
+			.then( res => {
+                console.log(JSON.stringify(res, null, 2));
 				this.setState({ ballots: res.data, ballot_name:"", ballot_active:"", ballot_expiration:"" })
-				)
+            })
 			.catch(err => console.log(err));
 	};
 

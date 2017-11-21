@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "cascade",
             foreignKey: "issue_id"
         });
+        // A Position belongs to an Issue
     };
 
     return Issue;
