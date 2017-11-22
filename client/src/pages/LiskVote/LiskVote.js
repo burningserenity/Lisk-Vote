@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, Jumbotron, JumboBtn } from "../../components/Jumbotron/";
 import { Link } from 'react-router-dom';
 import { Col, Row, Container } from "../../components/Grid/";
+import axios from 'axios';
 import "./LiskVote.css"
 
 class LiskVote extends Component {
@@ -21,6 +22,15 @@ class LiskVote extends Component {
 		this.setState(change);
 	}
 
+    handleFormSubmit = e => {
+        e.preventDefault();
+        if (this.state.voter_passphrase) {
+            console.log(this.state.voter_passphrase);
+            axios.get(`/api/voters/${this.state.voter_passphrase}`).then(() => window.location.href = '/openvotes')
+                                                                   .catch(err => console.log(err));
+        }
+    };
+
 	render() {
 
 		return (
@@ -30,7 +40,7 @@ class LiskVote extends Component {
 						<Jumbotron>
 							<h1>LivBold</h1>
 							<Input onChange={this.handleChange.bind(this)} id="voter_passphrase" />
-							<JumboBtn />
+							<JumboBtn onClick={this.handleFormSubmit.bind(this)}/>
 
 						</Jumbotron>
 

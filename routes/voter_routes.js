@@ -22,6 +22,29 @@ router.get("/api/voters/:address", (req, res) => {
     });
 });
 
+// Select a single voter by passphrase ---- will become hash of passphrase
+router.get("/api/voters/:passphrase", (req, res) => {
+    voter.findOne({
+        where: {
+            voter_passphrase: req.params.passphrase
+        }
+    }).then(dbVoter => {
+        console.log(dbVoter);
+        res.json(dbVoter);
+    });
+});
+
+router.get("/api/voters/:address", (req, res) => {
+    voter.findOne({
+        where: {
+            voter_address: req.params.address
+        }
+    }).then(dbVoter => {
+        console.log(dbVoter);
+        res.json(dbVoter);
+    });
+});
+
 // Add a voter
 router.post("/api/voters", (req, res) => {
     let voterList = [];
