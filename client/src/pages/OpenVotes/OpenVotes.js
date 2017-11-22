@@ -3,7 +3,7 @@ import { Col, Row, Container } from "../../components/Grid/";
 import API from "../../utils/API";
 import { BallotCards, BallotBtn } from "../../components/BallotCards/";
 import "./OpenVotes.css";
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
 
 
@@ -42,7 +42,7 @@ class OpenVotes extends Component {
                   <ListGroupItem key={ballot.id}>
                     <Link to={"/openvotes/" + ballot.id}>
                       <strong>
-                        {ballot.ballot_name} Expires {ballot.ballot_expiration}
+                        Ballot Name/Topic: {ballot.ballot_name} <br/> Ballot Expires: {ballot.ballot_expiration}
                       </strong>
                     </Link>
                   </ListGroupItem>
