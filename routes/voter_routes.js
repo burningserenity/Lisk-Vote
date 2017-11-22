@@ -42,7 +42,7 @@ router.post("/api/voters", (req, res) => {
             voter_lastName: req.body.lastName,
             voter_email: req.body.email
         }).then(dbVoter => {
-            res.json(dbVoter);
+            res.redirect('/openvotes');
         });
     });
 });

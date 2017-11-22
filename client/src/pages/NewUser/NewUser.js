@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { FormBtn, Input } from "../../components/Form/";
 import { Col, Row, Container } from "../../components/Grid/";
 import { Link } from "react-router-dom";
@@ -16,7 +17,11 @@ class NewUser extends Component {
 			voter_email: "",
 			voter_passphrase: ""
 		};
+
 	}
+        /*static contextTypes = {
+            router: PropTypes.object.isRequired
+        }*/
 
 	handleChange(e) {
 		let prop = e.target.id;
@@ -36,10 +41,14 @@ handleInputChange = e => {
 handleFormSubmit = e => {
  	e.preventDefault();
 
+ handleFormSubmit(e) {
+ 	e.preventDefault();
+
  if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
      let submitArr = [this.state.voter_firstName, this.state.voter_lastName, this.state.voter_passphrase, this.state.voter_email];
-     axios.post('/api/voters', {voter_firstName: submitArr[0], voter_lastName: submitArr[1], voter_passphrase: submitArr[2], voter_email: submitArr[2]}).then(res => res.redirect('/openvotes'))
- 	   .catch(err => console.log(err));
+     console.log(submitArr);
+     axios.post('/api/voters', {firstName: submitArr[0], lastName: submitArr[1], passphrase: submitArr[2], email: submitArr[3]}).then(() => window.location.href = '/openvotes')
+ 	                                     .catch(err => console.log(err));
  	}
 };
 
@@ -83,7 +92,7 @@ handleFormSubmit = e => {
 								name="voter_passphrase"
 								placeholder="Passphrase (Required)"
 								/>
-								<FormBtn />
+								<FormBtn onClick={this.handleFormSubmit.bind(this)}/>
 						</form>
 					</Col>
 					</Col>
