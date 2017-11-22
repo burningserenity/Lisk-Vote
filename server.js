@@ -13,8 +13,6 @@ const db = require("./models");
 const voter_routes = require("./routes/voter_routes.js");
 const ballot_routes = require("./routes/ballot_routes.js");
 const issue_routes = require("./routes/issue_routes.js");
-const position_routes = require("./routes/position_routes.js");
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -25,7 +23,7 @@ app.use(express.static('client/build'));
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
 
-app.use("/", voter_routes, ballot_routes, issue_routes, position_routes);
+app.use("/", voter_routes, ballot_routes, issue_routes);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, './client/public/index.html'));

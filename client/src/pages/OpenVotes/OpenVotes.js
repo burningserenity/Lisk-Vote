@@ -23,9 +23,9 @@ class OpenVotes extends Component {
 	loadBallots = () => {
 		API.getBallots()
 			.then( res => {
-                console.log(JSON.stringify(res, null, 2));
+				console.log(res.data);
 				this.setState({ ballots: res.data, ballot_name:"", ballot_active:"", ballot_expiration:"" })
-            })
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -33,9 +33,9 @@ class OpenVotes extends Component {
 	render() {
 		return (
 			<Container>
-      <Row>
-<Col size="md-12">
-              <h1>Ballots</h1>
+      	<Row>
+					<Col size="md-12">
+            <h1>Ballots</h1>
             {this.state.ballots.length ? (
               <ListGroup>
                 {this.state.ballots.map(ballot => (
@@ -54,7 +54,7 @@ class OpenVotes extends Component {
           </Col>
         </Row>
 			</Container>
-			);
+		);
 	}
 }
 
