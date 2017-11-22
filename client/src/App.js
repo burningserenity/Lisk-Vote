@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import  { BrowserRouter, Router, Route, Switch } from 'react-router-dom';
+import  { Route, Switch } from 'react-router-dom';
 import OpenVotes from './pages/OpenVotes/OpenVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
 import NewUser from './pages/NewUser/NewUser';
 import VoteResults from './pages/VoteResults/VoteResults';
 import NavBar from "./components/Nav";
 import { footer } from "react-bootstrap";
-
-
-
 
 class App extends Component {
 	constructor() {
@@ -29,7 +26,6 @@ class App extends Component {
 	render() {
 		return(
 			<div>
-
 				<NavBar />
 				<Switch>
 					<Route exact path="/" component={LiskVote} />
@@ -40,6 +36,8 @@ class App extends Component {
 
 					<Route exact path="/voteresults" component={VoteResults} />
 				</Switch>
+
+
 			</div>
 		);
 	}
