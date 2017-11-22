@@ -7,6 +7,7 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
 
 
+
 class OpenVotes extends Component {
 		state = {
 			ballots: [],

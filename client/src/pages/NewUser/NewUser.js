@@ -3,6 +3,8 @@ import { FormBtn, Input } from "../../components/Form/";
 import { Col, Row, Container } from "../../components/Grid/";
 import { Link } from "react-router-dom";
 import { Jumbotron } from "../../components/Jumbotron";
+import axios from "axios";
+import "./NewUser.css";
 
 class NewUser extends Component {
 	constructor() {
@@ -31,17 +33,15 @@ handleInputChange = e => {
 	});
 };
 
+handleFormSubmit = e => {
+ 	e.preventDefault();
 
-// handleFormSubmit = e => {
-// 	event.preventDefault();
-
-// if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
-// ----->> Blah Blah Blah Save User information <<-----
-// 	.then(res => this.Blah Blah Blah Render new page <<-----)
-// 	.catch(err => console.log(err));
-// 	}
-// };
-
+ if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
+     let submitArr = [this.state.voter_firstName, this.state.voter_lastName, this.state.voter_passphrase, this.state.voter_email];
+     axios.post('/api/voters', {voter_firstName: submitArr[0], voter_lastName: submitArr[1], voter_passphrase: submitArr[2], voter_email: submitArr[2]}).then(res => res.redirect('/openvotes'))
+ 	   .catch(err => console.log(err));
+ 	}
+};
 
 	render() {
 		return (
@@ -51,8 +51,10 @@ handleInputChange = e => {
 						<Jumbotron>
 							<h1>Please Enter Your Information</h1>
 						</Jumbotron>
-					<Col size = "md-8">
-						<form>
+
+
+					<Col size="md-8 centered">
+						<form align="center">
 							<Input
 								value={this.state.voter_firstName}
 								onChange={this.handleInputChange.bind(this)}
@@ -85,6 +87,7 @@ handleInputChange = e => {
 						</form>
 					</Col>
 					</Col>
+
 				</Row>
 			</Container>
 			);

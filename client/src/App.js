@@ -6,6 +6,7 @@ import NewUser from './pages/NewUser/NewUser';
 import VoteResults from './pages/VoteResults/VoteResults';
 import NavBar from "./components/Nav";
 
+
 class App extends Component {
 	constructor() {
 		super();
@@ -25,6 +26,7 @@ class App extends Component {
 	render() {
 		return(
 			<div>
+
 				<NavBar />
 				<Switch>
 					<Route exact path="/" component={LiskVote} />
