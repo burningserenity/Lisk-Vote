@@ -5,6 +5,7 @@ import { Col, Row, Container } from "../../components/Grid/";
 import { Link } from "react-router-dom";
 import { Jumbotron } from "../../components/Jumbotron";
 import axios from "axios";
+import "./NewUser.css";
 
 class NewUser extends Component {
 	constructor() {
@@ -37,6 +38,8 @@ handleInputChange = e => {
 	});
 };
 
+handleFormSubmit = e => {
+ 	e.preventDefault();
 
  handleFormSubmit(e) {
  	e.preventDefault();
@@ -49,7 +52,6 @@ handleInputChange = e => {
  	}
 };
 
-
 	render() {
 		return (
 			<Container fluid>
@@ -58,8 +60,10 @@ handleInputChange = e => {
 						<Jumbotron>
 							<h1>Please Enter Your Information</h1>
 						</Jumbotron>
-					<Col size = "md-8">
-						<form>
+
+
+					<Col size="md-8 centered">
+						<form align="center">
 							<Input
 								value={this.state.voter_firstName}
 								onChange={this.handleInputChange.bind(this)}
@@ -92,6 +96,7 @@ handleInputChange = e => {
 						</form>
 					</Col>
 					</Col>
+
 				</Row>
 			</Container>
 			);

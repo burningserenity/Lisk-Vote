@@ -4,8 +4,7 @@
   "description": "Anonymous voting to be used with the Lisk SDK",
   "main": "index.js",
   "scripts": {
-      "start": "concurrently \"npm run server-only\" \"cd client && npm start\" ",
-      "server-only": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "lisk",
@@ -19,9 +18,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "cirrus-ui": "^0.5.31",
-    "concurrently": "^3.5.0",
-    "cors": "^2.8.4",
     "express": "^4.16.2",
+    "faker": "^4.1.0",
     "method-override": "^2.3.10",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
