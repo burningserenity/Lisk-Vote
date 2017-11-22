@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { FormBtn, Input } from "../../components/Form/";
 import { Col, Row, Container } from "../../components/Grid/";
 import { Link } from "react-router-dom";
@@ -15,7 +16,11 @@ class NewUser extends Component {
 			voter_email: "",
 			voter_passphrase: ""
 		};
+
 	}
+        /*static contextTypes = {
+            router: PropTypes.object.isRequired
+        }*/
 
 	handleChange(e) {
 		let prop = e.target.id;
@@ -39,7 +44,7 @@ handleInputChange = e => {
  if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
      let submitArr = [this.state.voter_firstName, this.state.voter_lastName, this.state.voter_passphrase, this.state.voter_email];
      console.log(submitArr);
-     axios.post('/api/voters', {firstName: submitArr[0], lastName: submitArr[1], passphrase: submitArr[2], email: submitArr[3]}).then(res => res.redirect('/openvotes'))
+     axios.post('/api/voters', {firstName: submitArr[0], lastName: submitArr[1], passphrase: submitArr[2], email: submitArr[3]}).then(() => window.location.href = '/openvotes')
  	                                     .catch(err => console.log(err));
  	}
 };
