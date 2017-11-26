@@ -9,7 +9,7 @@ const faker = require('faker');
 // ballot.findAll().then(ballots => console.log(ballots));
 
 // let count = 30;
-//
+
 // while ( count-- ) {
 //     ballot.create({
 //         ballot_name: faker.name.firstName(),
