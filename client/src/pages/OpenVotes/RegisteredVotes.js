@@ -8,7 +8,7 @@ import  { Link } from 'react-router-dom';
 
 
 
-class OpenVotes extends Component {
+class RegisteredVotes extends Component {
 		state = {
 			ballots: [],
 		};
@@ -43,7 +43,7 @@ class OpenVotes extends Component {
               <ListGroup>
                 {this.state.ballots.map(ballot => (
                   <ListGroupItem key={ballot.id}>
-                    <Link to={"/openvotes/" + ballot.id}>
+                    <Link to={"/registeredvotes/" + ballot.id}>
                       <strong>
                         Ballot Name/Topic: {ballot.ballot_name} <br/> Ballot Expires: {ballot.ballot_expiration}
                       </strong>
@@ -61,4 +61,4 @@ class OpenVotes extends Component {
 	}
 }
 
-export default OpenVotes;
+export default RegisteredVotes;

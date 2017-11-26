@@ -24,6 +24,7 @@ class OpenVotes extends Component {
         API.getBallots()
             .then( res => {
                 console.log(res.data);
+                this.setState({ballots: res.data});
             })
             .catch(err => console.log(err));
     };
