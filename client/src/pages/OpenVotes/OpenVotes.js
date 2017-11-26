@@ -13,17 +13,25 @@ class OpenVotes extends Component {
 			ballots: [],
 			ballot_name: "",
 			ballot_active: "",
-			ballot_expiration: ""
+            ballot_expiration: "",
+            voter_id: ""
 		};
 
 	componentDidMount() {
 		this.loadBallots();
 	}
 
-	loadBallots = () => {
-		API.getBallots()
+	loadBallots() {
+		API.getRegisteredBallots(this.props.match.params.voter)
 			.then( res => {
-				console.log(res.data);
+                console.log("Hit voter route");
+                console.log(JSON.stringify(res, null, 2));
+                let activeBallots = [];
+                let inactiveBallots = [];
+                let registeredBallots = [];
+                res.data.forEach(function(element) {
+                    this.ballot_active ? activeBallots.push(this) : inactiveBallots.push(this)
+                });
 				this.setState({ ballots: res.data, ballot_name:"", ballot_active:"", ballot_expiration:"" })
 			})
 			.catch(err => console.log(err));
