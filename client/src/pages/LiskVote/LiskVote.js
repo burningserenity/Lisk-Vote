@@ -26,8 +26,10 @@ class LiskVote extends Component {
         e.preventDefault();
         if (this.state.voter_passphrase) {
             console.log(this.state.voter_passphrase);
-            axios.get(`/api/voters?passphrase=${this.state.voter_passphrase}`).then(res => window.location.href = `/openvotes/${res.data.id}`)
+
+            axios.get(`/api/voters?passphrase=${this.state.voter_passphrase}`).then(res => window.location.href = `/registeredvotes/${res.data.id}`)
                                                                    .catch(err => console.log(err));
+
         }
     };
 
