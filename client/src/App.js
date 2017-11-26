@@ -4,6 +4,7 @@ import OpenVotes from './pages/OpenVotes/OpenVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
 import NewUser from './pages/NewUser/NewUser';
 import VoteResults from './pages/VoteResults/VoteResults';
+import CastVote from './pages/CastVote/CastVote';
 import NavBar from "./components/Nav";
 
 class App extends Component {
@@ -32,6 +33,8 @@ class App extends Component {
 						<Route exact path="/newuser" component={NewUser} />
 
 					<Route exact path="/openvotes" component={OpenVotes} />
+
+					<Route exact path="/openvotes/:id" component={CastVote} />
 
 					<Route exact path="/voteresults" component={VoteResults} />
 				</Switch>
