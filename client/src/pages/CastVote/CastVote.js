@@ -1,61 +1,57 @@
 import React, { Component } from 'react';
-import { Panel, FormGroup, Radio } from 'react-bootstrap';
+import { Col, Row, Container } from "../../components/Grid/"
+import { ListGroup, ListGroupItem, Table, Panel, FormGroup, Radio } from 'react-bootstrap';
 import axios from 'axios';
 import API from "../../utils/API";
+import BallotCard from "../../components/BallotCards/BallotCards";
 import BallotBtn from "../../components/BallotCards/BallotBtn";
 
-
 class CastVote extends Component {
-	constructor() {
-		super();
 
-		this.state = {
-			issue_id: ""
-		};
-	}
+    state = {
+        voter_id: 1,
+        ballot: {}
+    };
 
-handleChange(e) {
-	let prop = e.target.id;
-	let change = {};
+    loadBallot = () => {
+        API.getBallot(1)
+            .then( res => {
+                this.setState({ballot: res.data});
+            })
+            .catch(err => console.log(err));
+    };
 
-	change [prop] = e.target.value;
-	this.setState(change);
-}
+    componentDidMount() {
+        this.loadBallot();
+    };
 
+    handleChange(e) {
+        let prop = e.target.id;
+        let change = {};
 
-	handleFormSubmit = e => {
-		e.preventDefault();
-		if (this.state.issue_id) {
-			console.log(this.state.issue_id);
-			axios.get('/api/issues/${this.state.issue_id}').then(() => window.location.href = '/openvotes/:id');
-		}
-};
+        change [prop] = e.target.value;
+        this.setState(change);
+    };
 
-	loadBallot = () => {
-		API.getBallot()
-			.then( res => {
-				console.log(res.data);
-				this.setState({ ballots: res.data, ballot_name: "", ballot_active: "", ballot_expiration: ""})
-			})
-			.catch(err => console.log(err));
-	};
+    handleFormSubmit = e => {
+        e.preventDefault();
+        if (this.state.issue_id) {
+            console.log(this.state.issue_id);
+            axios.get('/api/ballots/${this.state.ballot_id.Issues}').then(() => window.location.href = '/openvotes');
+        }
+    };
 
-
-
-render() {
-	return(
-  <Panel defaultExpanded header={this.state.ballot_name}>
-    Some default panel content here.
-    <FormGroup fill>
-      <Radio name="radioGroup" onChange={this.handleChange.bind(this)} id="issue_id">Item 1</Radio>
-      <Radio name="radioGroup" onChange={this.handleChange.bind(this)} id="issue_id">Item 2</Radio>
-    	<Radio name="radioGroup" onChange={this.handleChange.bind(this)} id="issue_id">Item 3</Radio>
-    </FormGroup>
-    Some more panel content here.
-  </Panel>
-
-		);
-	}
+    render() {
+        return(
+            <Container>
+                <Row>
+                    <Col size="md-12">
+                        <BallotCard ballot={this.state.ballot}/>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
 }
 
 export default CastVote;

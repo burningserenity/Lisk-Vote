@@ -43,7 +43,7 @@ class RegisteredVotes extends Component {
               <ListGroup>
                 {this.state.ballots.map(ballot => (
                   <ListGroupItem key={ballot.id}>
-                    <Link to={"/registeredvotes/" + ballot.id}>
+                    <Link to={"/registeredvotes/" + ballot.id + "/" + this.props.match.params.voter}>
                       <strong>
                         Ballot Name/Topic: {ballot.ballot_name} <br/> Ballot Expires: {ballot.ballot_expiration}
                       </strong>
