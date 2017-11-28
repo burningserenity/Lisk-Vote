@@ -1,19 +1,12 @@
 import React from 'react';
+import { ListGroup, ListGroupItem, Table, Panel, FormGroup, Radio } from 'react-bootstrap';
 
-export const BallotCard = props => {
+const BallotCard = props => 
+    <div>
+        <h2>{props.ballot[0].ballot_name}</h2>
+    <p>{JSON.stringify(props.issues[1].issue_name, null, 2)}</p>
+        <div>
+        </div>
+    </div>;
 
-	<div>
-
-<div className="card bg-light mb-3" style="max-width: 20rem;">
-  <div className="card-header">Header</div>
-  <div className="card-body">
-    <h4 className="card-title">Light card title</h4>
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-    </p>
-  </div>
-  </div>
-
-
-  </div>
-
-};
+export default BallotCard;

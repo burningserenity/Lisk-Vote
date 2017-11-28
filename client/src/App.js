@@ -37,7 +37,7 @@ class App extends Component {
 
                         <Route exact path="/registeredvotes/:voter?" component={RegisteredVotes} />
 
-					<Route exact path="/openvotes/:id" component={CastVote} />
+					<Route exact path="/registeredvotes/:id/:voter" component={CastVote} />
 
 					<Route exact path="/voteresults" component={VoteResults} />
 				</Switch>

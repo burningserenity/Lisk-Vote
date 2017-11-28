@@ -10,10 +10,7 @@ import  { Link } from 'react-router-dom';
 
 class OpenVotes extends Component {
     state = {
-        ballots: [],
-        ballot_name: "",
-        ballot_active: "",
-        ballot_expiration: ""
+        ballots: []
     };
 
     componentDidMount() {
@@ -40,7 +37,7 @@ class OpenVotes extends Component {
                             <ListGroup>
                                 {this.state.ballots.map(ballot => (
                                     <ListGroupItem key={ballot.id}>
-                                        <Link to={"/openvotes/" + ballot.id}>
+                                        <Link to={"/openvotes"}> /*This will be a link to register for the ballot clicked on*/
                                             <strong>
                                                 Ballot Name/Topic: {ballot.ballot_name} <br/> Ballot Expires: {ballot.ballot_expiration}
                                             </strong>
