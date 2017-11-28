@@ -9,14 +9,14 @@ import BallotBtn from "../../components/BallotCards/BallotBtn";
 class CastVote extends Component {
 
     state = {
-        voter_id: 1,
-        ballot: {}
+        voter_id: this.props.match.params.voter,
+        ballot: []
     };
 
     loadBallot = () => {
-        API.getBallot(1)
+        API.getBallot(this.props.match.params.id)
             .then( res => {
-                this.setState({ballot: res.data});
+                this.setState({ballot: [res.data]});
             })
             .catch(err => console.log(err));
     };
@@ -46,7 +46,9 @@ class CastVote extends Component {
             <Container>
                 <Row>
                     <Col size="md-12">
-                        <BallotCard ballot={this.state.ballot}/>
+                        {this.state.ballot.length > 0 &&
+                                <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues}/>
+                        }
                     </Col>
                 </Row>
             </Container>

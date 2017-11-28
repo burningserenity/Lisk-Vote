@@ -1,19 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ListGroup, ListGroupItem, Table, Panel, FormGroup, Radio } from 'react-bootstrap';
 
-class BallotCard extends Component {
-    constructor() {
-        super();
-    }
-
-    render() {
-        return(
-            <div>
-                <h2>{props.ballot.ballot_name}</h2>
-                <IssueName key={props.ballot.ballot_name.Issues}
-            </div>
-        );
-    }
-}
+const BallotCard = props => 
+    <div>
+        <h2>{props.ballot[0].ballot_name}</h2>
+    <p>{JSON.stringify(props.issues[1].issue_name, null, 2)}</p>
+        <div>
+        </div>
+    </div>;
 
 export default BallotCard;
