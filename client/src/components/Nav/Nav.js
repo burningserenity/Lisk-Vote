@@ -18,12 +18,6 @@ class NavBar extends Component {
         LivBold
       </Navbar.Brand>
       </LinkContainer>
-
-      <Nav pullRight>
-    <LinkContainer to="/newuser">
-        <NavItem eventKey={1} href="#">New User</NavItem>
-        </LinkContainer>
-     </Nav>
   </Navbar>
     );
   }

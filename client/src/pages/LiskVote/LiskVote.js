@@ -50,6 +50,7 @@ class LiskVote extends Component {
 							<Col size="md-6 centered">
 							<h4>Welcome to LivBold!</h4>
 							<p>If you have not signed up, please create a user account to gain access.</p>
+						<a href="/newuser" className="btn btn-sm btn-outline-success mr-3">New User</a>
 							<a href="#" className="btn btn-sm btn-secondary mr-3">
 							Contact Us</a>
 							<a href="#" className="btn btn-sm btn-secondary">FAQ </a>
@@ -68,7 +69,7 @@ class LiskVote extends Component {
 const styles = {
 	jumbotron: {
 		h1: {
-			marginBottom: '35px'
+			marginBottom: '30px'
 		}
 	}
 }
