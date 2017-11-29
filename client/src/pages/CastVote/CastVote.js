@@ -35,9 +35,9 @@ class CastVote extends Component {
 
     handleFormSubmit = e => {
         e.preventDefault();
+        console.log("form submit");
         if (this.state.issue_id) {
             console.log(this.state.issue_id);
-            axios.get('/api/ballots/${this.state.ballot_id.Issues}').then(() => window.location.href = '/openvotes');
         }
     };
 
@@ -49,7 +49,7 @@ class CastVote extends Component {
                         {this.state.ballot.length > 0 &&
                                 <div>
                                 <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
-                                <BallotBtn />
+                                <BallotBtn handleFormSubmit={this.handleFormSubmit}/>
                             </div>
                         }
                     </Col>
