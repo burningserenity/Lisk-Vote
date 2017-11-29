@@ -51,39 +51,45 @@ class NewUser extends Component {
             <Row>
                 <Col size = "md-12">
                     <Jumbotron>
-                        <h1>Please Enter Your Information</h1>
+                        <h2 style={styles.headings.h2}>Please Enter Your Information</h2>
+                        <h2 style={styles.headings.h2}>Gain Access to LivBold</h2>
                     </Jumbotron>
 
 
                     <Col size="md-8 centered">
                         <form align="center">
+                        <h4 style={styles.headings.h4}>First Name</h4>
                             <Input
                                 value={this.state.voter_firstName}
                                 onChange={this.handleInputChange.bind(this)}
                                 id="voter_firstName"
                                 name="voter_firstName"
-                                placeholder="First Name (Required)"
+                                placeholder="JD (Required)"
                             />
+                            <h4 style={styles.headings.h4}>Last Name</h4>
                             <Input
                                 value={this.state.voter_lastName}
                                 onChange={this.handleInputChange.bind(this)}
                                 id="voter_lastName"
                                 name="voter_lastName"
-                                placeholder="Last Name (Required)"
+                                placeholder="Tadlock (Required)"
                             />
+                            <h4 style={styles.headings.h4}>Email</h4>
                             <Input
                                 value={this.state.voter_email}
                                 onChange={this.handleInputChange.bind(this)}
                                 id="voter_email"
                                 name="voter_email"
-                                placeholder="Email (Required)"
+                                placeholder="jd@jdtdesigns.com (Required)"
                             />
+                            <h4 style={styles.headings.h4}>Passphrase</h4>
                             <Input
                                 value={this.state.voter_passphrase}
                                 onChange={this.handleInputChange.bind(this)}
+                                type="password"
                                 id="voter_passphrase"
                                 name="voter_passphrase"
-                                placeholder="Passphrase (Required)"
+                                placeholder="******** (Required)"
                             />
                             <FormBtn onClick={this.handleFormSubmit.bind(this)}/>
                         </form>
@@ -94,5 +100,19 @@ class NewUser extends Component {
     );
     }
 }
+const styles = {
+    headings: {
+        h4: {
+            textAlign: 'left'
+        },
+        h2: {
+            textAlign: 'center',
+            fontSize:  '3.3rem'
+        }
+    }
+}
+
+
+
 
     export default NewUser;
