@@ -1,7 +1,7 @@
 import React from "react";
 
 const BallotBtn = props =>
-  <button {...props} style={{ float: "right" }} className="btn btn-success">
+  <button style={{ float: "right" }} className="btn btn-success" onClick={props.handleFormSubmit}>
     {props.children}
     Vote
   </button>;
