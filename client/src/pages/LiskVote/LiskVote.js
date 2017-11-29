@@ -28,9 +28,7 @@ class LiskVote extends Component {
             console.log(this.state.voter_passphrase);
 
             axios.get(`/api/voters?passphrase=${this.state.voter_passphrase}`).then(res => window.location.href = `/registeredvotes/${res.data.id}`)
-                                                                   .catch(err => console.log(err));
-
-        }
+          }
     };
 
 	render() {
@@ -40,10 +38,23 @@ class LiskVote extends Component {
 				<Row>
 					<Col size="md-12">
 						<Jumbotron>
-							<h1>LivBold</h1>
-							<Input onChange={this.handleChange.bind(this)} id="voter_passphrase" />
+							<h1 style={styles.jumbotron.h1}>LivBold</h1>
+							<Row>
+							<Col size="md-6 centered">
+							<Input onChange={this.handleChange.bind(this)} id="voter_passphrase"
+							placeholder="Enter Passphrase" />
 							<JumboBtn onClick={this.handleFormSubmit.bind(this)}/>
-
+							</Col>
+							</Row>
+							<Row>
+							<Col size="md-6 centered">
+							<h4>Welcome to LivBold!</h4>
+							<p>If you have not signed up, please create a user account to gain access.</p>
+							<a href="#" className="btn btn-sm btn-secondary mr-3">
+							Contact Us</a>
+							<a href="#" className="btn btn-sm btn-secondary">FAQ </a>
+							</Col>
+							</Row>
 						</Jumbotron>
 
 						</Col>
@@ -51,6 +62,14 @@ class LiskVote extends Component {
 			</Container>
 
 		);
+	}
+}
+
+const styles = {
+	jumbotron: {
+		h1: {
+			marginBottom: '35px'
+		}
 	}
 }
 
