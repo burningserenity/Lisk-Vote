@@ -31,14 +31,13 @@ class CastVote extends Component {
 
         change [prop] = e.target.value;
         this.setState(change);
+        console.log(JSON.stringify(this.state, null, 2));
     };
 
     handleFormSubmit = e => {
         e.preventDefault();
         console.log("form submit");
-        if (this.state.issue_id) {
-            console.log(this.state.issue_id);
-        }
+        axios.put(`/api/ballots/vote/${this.state.ballot.id}`, {voter_id: this.state.voter_id, position: this.state.position})
     };
 
     render() {
