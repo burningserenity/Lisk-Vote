@@ -8,7 +8,7 @@ const Issue = props =>
                 {props.issue.issue_name}
                 <FormGroup fill>
                     {props.issue.Positions.map(position => (
-                        <Radio key={position.id} name={`radioGroup-${props.issue.id}`} onClick={props.onClick.bind(this)} id={`p-${position.id}`} value={position.id}>{position.position_name}</Radio>
+                        <Radio key={position.id} name={`radioGroup-${props.issue.id}`} onClick={props.onClick.bind(this)} id={`p-${position.id}`} value={`${props.issue.id},${position.id}`}>{position.position_name}</Radio>
                     ))}
                 </FormGroup>
                 Expires: {props.ballot_expiration}
