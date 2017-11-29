@@ -1,8 +1,16 @@
 import React from "react";
 import "./Jumbotron.css";
 
-export const Jumbotron = ({ children }) =>
-<div style={{ height: 300 }} className="jumbotron">
+export const Jumbotron = ({ children }) => (
+<div className="jumbotron"
+style={styles.jumbo}>
 {children}
-</div>;
+</div>
+)
 
+const styles = {
+	jumbo: {
+		marginTop: '45px',
+		backgroundColor: 'rgba(30, 30, 30, .65)'
+	}
+}
