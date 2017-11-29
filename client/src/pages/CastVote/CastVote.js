@@ -25,7 +25,7 @@ class CastVote extends Component {
         this.loadBallot();
     };
 
-    handleChange(e) {
+    handleChange = e => {
         let prop = e.target.id;
         let change = {};
 
@@ -47,7 +47,10 @@ class CastVote extends Component {
                 <Row>
                     <Col size="md-12">
                         {this.state.ballot.length > 0 &&
+                                <div>
                                 <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
+                                <BallotBtn />
+                            </div>
                         }
                     </Col>
                 </Row>
