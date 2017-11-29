@@ -47,7 +47,7 @@ class CastVote extends Component {
                 <Row>
                     <Col size="md-12">
                         {this.state.ballot.length > 0 &&
-                                <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues}/>
+                                <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
                         }
                     </Col>
                 </Row>
