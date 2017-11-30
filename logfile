@@ -16,3 +16,8 @@
 2017-11-28 19:36:56.660 EST [4469] LOG:  database system is ready to accept connections
 2017-11-28 19:45:17.229 EST [7279] FATAL:  lock file "postmaster.pid" already exists
 2017-11-28 19:45:17.229 EST [7279] HINT:  Is another postmaster (PID 4469) running in data directory "/home/helios/postgres"?
+2017-11-28 21:23:33.968 EST [4469] LOG:  received smart shutdown request
+2017-11-28 21:23:33.981 EST [4469] LOG:  worker process: logical replication launcher (PID 4476) exited with exit code 1
+2017-11-28 21:23:33.981 EST [4469] LOG:  received SIGHUP, reloading configuration files
+2017-11-28 21:23:33.982 EST [4471] LOG:  shutting down
+2017-11-28 21:23:34.057 EST [4469] LOG:  database system is shut down
