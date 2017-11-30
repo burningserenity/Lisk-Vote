@@ -1,17 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Nav.css";
+import { Navbar, Nav, MenuItem, NavDropdown, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 
-const Nav = () => (
-  <nav className="navbar navbar-dark bg-dark">
-    <div className="container-fluid">
-      <div className="navbar-header">
-        <a href="/" className="navbar-brand">
-          LiskApp
-        </a>
-      </div>
-    </div>
-  </nav>
-);
+class NavBar extends Component {
+  handleClick = e => {
+    e.preventDefault();
+    console.log('The link was clicked');
+  };
 
-export default Nav;
+  render() {
+    return(
+    <Navbar inverse>
+    <LinkContainer to="/">
+      <Navbar.Brand>
+        LivBold
+      </Navbar.Brand>
+      </LinkContainer>
+  </Navbar>
+    );
+  }
+}
+
+export default NavBar;

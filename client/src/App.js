@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch} from 'react-router-dom';
+import  { Route, Switch } from 'react-router-dom';
 import OpenVotes from './pages/OpenVotes/OpenVotes';
+import RegisteredVotes from './pages/OpenVotes/RegisteredVotes';
 import LiskVote from './pages/LiskVote/LiskVote';
 import NewUser from './pages/NewUser/NewUser';
 import VoteResults from './pages/VoteResults/VoteResults';
-import Nav from "./components/Nav";
-
+import CastVote from './pages/CastVote/CastVote';
+import NavBar from "./components/Nav";
 
 class App extends Component {
 	constructor() {
@@ -26,16 +27,22 @@ class App extends Component {
 	render() {
 		return(
 			<div>
-				<Nav />
+				<NavBar />
 				<Switch>
 					<Route exact path="/" component={LiskVote} />
 
 						<Route exact path="/newuser" component={NewUser} />
 
-					<Route exact path="/openvotes" component={OpenVotes} />
+                        <Route exact path="/openvotes" component={OpenVotes} />
+
+                        <Route exact path="/registeredvotes/:voter?" component={RegisteredVotes} />
+
+					<Route exact path="/registeredvotes/:id/:voter" component={CastVote} />
 
 					<Route exact path="/voteresults" component={VoteResults} />
 				</Switch>
+
+
 			</div>
 		);
 	}

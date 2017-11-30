@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid/";
+import { Tabs, Tab } from "react-bootstrap";
+import"./VoteResults.css";
 
 
 class VoteResults extends Component {
 
 render() {
 	return(
-		<Container fluid>
+		<Container>
 			<Row>
 				<Col size="md-12">
 
@@ -17,6 +19,11 @@ render() {
     Vote Results
   </div>
   <div className="card-body">
+  <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+    <Tab eventKey={1} title="Tab 1">Tab 1 content</Tab>
+    <Tab eventKey={2} title="Tab 2">Tab 2 content</Tab>
+    <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
+  </Tabs>
     <h4 className="card-title">Here are the Results for the Ballot you selected</h4>
     <p className="card-text">All voters are kept annonymous to ensure validity of votes.</p>
 

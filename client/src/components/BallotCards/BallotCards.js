@@ -1,18 +1,15 @@
 import React from 'react';
+import { ListGroup, ListGroupItem, Table, Panel, FormGroup, Radio } from 'react-bootstrap';
+import Issue from "./Issues"
 
-export const BallotCard = props => {
+const BallotCard = props =>
 
-	<div>
+    <div>
+        <FormGroup id='ballotForm' name='ballotForm'>
+        {props.ballot[0].Issues.map( issue => (
+            <Issue ballot_name={props.ballot[0].ballot_name} ballot_expiration={props.ballot[0].ballot_expiration} issue={issue} onClick={props.handleChange}/>
+        ))}
+    </FormGroup>
+    </div>;
 
-<div className="card bg-light mb-3" style="max-width: 20rem;">
-  <div className="card-header">Header</div>
-  <div className="card-body">
-    <h4 className="card-title">Light card title</h4>
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  </div>
-
-
-  </div>
-
-};
+export default BallotCard;

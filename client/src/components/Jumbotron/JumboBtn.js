@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export const JumboBtn = props =>
 <div>
@@ -8,9 +8,4 @@ export const JumboBtn = props =>
     Gain Entry
   </button>
 
-  <button {...props} style={{ float: "left" }} className="btn btn-warning btn-lg">
-  <Link to="/newuser" style={{ color: "white" }}>
-  New User
-  </Link>
-  </button>
   </div>;

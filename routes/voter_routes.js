@@ -3,15 +3,51 @@ const router = require("express").Router();
 const path = require('path');
 
 // Select all voters
-router.get("/api/voters", (req, res) => {
+router.get("/api/voters/all", (req, res) => {
     voter.findAll().then(dbVoter => {
         console.log(dbVoter);
         res.json(dbVoter);
     });
 });
 
-// Select a single voter by address
-router.get("/api/voters/:address", (req, res) => {
+// Select a single voter by query
+router.get("/api/voters", (req, res) => {
+    if (req.query.address) {
+        voter.findOne({
+            where: {
+                voter_address: req.query.address
+            }
+        }).then(dbVoter => {
+            console.log(dbVoter);
+            res.json(dbVoter);
+        });
+    }
+    else if (req.query.passphrase) {
+        voter.findOne({
+            where: {
+                voter_passphrase: req.query.passphrase
+            }
+        }).then(dbVoter => {
+            console.log(dbVoter);
+            res.json(dbVoter);
+        });
+    }
+    else (res.redirect("/api/voters/all"));
+});
+
+// Select a single voter by passphrase ---- will become hash of passphrase
+router.get("/api/voters?pass=:passphrase", (req, res) => {
+    voter.findOne({
+        where: {
+            voter_passphrase: req.params.passphrase
+        }
+    }).then(dbVoter => {
+        console.log(req.params.passhprase);
+        res.json(dbVoter);
+    });
+});
+
+router.get("/api/voters?addr=:address", (req, res) => {
     voter.findOne({
         where: {
             voter_address: req.params.address
@@ -42,7 +78,7 @@ router.post("/api/voters", (req, res) => {
             voter_lastName: req.body.lastName,
             voter_email: req.body.email
         }).then(dbVoter => {
-            res.json(dbVoter);
+            res.redirect('/openvotes');
         });
     });
 });

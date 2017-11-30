@@ -1,12 +1,38 @@
 const router = require("express").Router();
+const sequelize = require("../models").sequelize;
 const ballot = require("../models").Ballot;
 const voter = require("../models").Voter;
 const issue = require("../models").Issue;
 const position = require("../models").Position;
+const faker = require('faker');
+
+// ballot.findAll().then(ballots => console.log(ballots));
+
+// let count = 30;
+
+// while ( count-- ) {
+//     ballot.create({
+//         ballot_name: faker.name.firstName(),
+//         ballot_active: true,
+//         ballot_start: faker.date.past(),
+//         ballot_expiration: faker.date.future(),
+//         ballot_registered_voters: 1
+//     })
+//     .then(result => console.log(console.log(result)))
+//     .catch(err => console.log(err));
+// }
+
 
 // Select all ballots
 router.get("/api/ballots", (req, res) => {
-    ballot.findAll().then(dbBallot => {
+    ballot.findAll({
+        include: [{
+            model: issue,
+            include: [{
+                model: position
+            }]
+        }]
+    }).then(dbBallot => {
         console.log(dbBallot);
         res.json(dbBallot);
     });
@@ -14,7 +40,7 @@ router.get("/api/ballots", (req, res) => {
 
 // Select ballot by id
 router.get("/api/ballots/:id", (req, res) => {
-    
+
     ballot.findOne({
         where: {
             id: req.params.id
@@ -28,6 +54,31 @@ router.get("/api/ballots/:id", (req, res) => {
     }).then(dbBallot => {
         res.json(dbBallot);
     });
+});
+
+// Select all ballots a voter is registered for
+router.get("/api/ballots/registered/:voter_id", (req, res) => {
+    let voterBallots = {};
+    sequelize.transaction().then(go => {
+        return voter.findOne({
+            where: {
+                id: req.params.voter_id,
+            }
+        }).then(dbVoter => {
+            return dbVoter.getBallots({
+                include: [{
+                    model: issue,
+                    include: [{
+                        model: position
+                    }]
+                }]
+            });
+        }).then(dbRegistration => {
+            voterBallot = dbRegistration;
+            console.log(dbRegistration);
+        }).then(() => go.commit())
+            .catch(err => console.error("Transaction failed: ", err));
+    }).then(() => res.json(voterBallot));
 });
 
 // Add new ballot
@@ -74,7 +125,42 @@ router.put("/api/ballots/:id", (req, res) => {
 
 // Register voters for ballot
 router.put("/api/ballots/register/:id", (req, res) => {
-    console.log(JSON.stringify(Ballot, null, 2));
+    let selBallot = {};
+    let registration = {};
+    sequelize.transaction().then(go => {
+        return ballot.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then((dbBallot) => {
+            selBallot = dbBallot;
+            return voter.findOne({
+                where: {
+                    id: req.body.voter_id
+                }
+            });
+        }).then((resVoter) => {
+            return selBallot.addVoter(resVoter);
+        }).then(dbRegistration => {
+            return registration = dbRegistration;
+        }).then(() => {
+            ballot.update({
+                ballot_registered_voters: selBallot.ballot_registered_voters + 1
+            }, {
+                where: {
+                    id: selBallot.id
+                }
+            });
+        }).then(() => {
+            go.commit();
+            console.log("Committing transaction...");
+        }).catch(err => {
+            go.rollback();
+            console.error("Transaction failed: ", err)
+        });
+    }).then(() => {
+        res.json(registration);
+    });
 });
 
 // Activate or Deactivate ballot
@@ -96,6 +182,53 @@ router.put("/api/ballots/toggle/:id", (req, res) => {
     }).then((dbToggle) => {
         console.log(dbToggle);
         res.json(dbToggle);
+    });
+});
+
+// Cast a vote
+router.put("/api/ballots/vote/:ballot_id", (req, res) => {
+    sequelize.transaction().then(go => {
+        let voting = {};
+        let election = {};
+        return voter.findOne({
+            where: {
+                // This should be replaced with session token
+                id: req.body.voter_id
+            }
+        }).then(currVoter => {
+            voting = currVoter;
+            return currVoter.getBallots({
+                where: {
+                    id: req.params.ballot_id
+                }
+            });
+        }).then(voterBallots => {
+            if (voterBallots == "") {
+                go.rollback();
+                console.error(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`);
+                res.json(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`)
+            }
+            election = voterBallots;
+            console.log(`\n${JSON.stringify(req.body, null, 2)}\n`);
+            return req.body.position.forEach(currPosition => {
+                console.log(currPosition);
+                position.findOne({
+                    where: {
+                        id: currPosition
+                    }
+                }).then(found => {
+                    found.update({
+                        position_tally: (parseInt(found.position_tally) + parseInt(voting.voter_stake))    
+                    });
+                });
+            });
+        }).then(() => {
+            return voting.removeBallot(election);
+        }).then(() => go.commit())
+            .catch(err => console.error("Ballot cast failed: ", err));
+    }).then(dbCast => {
+        console.log(dbCast);
+        res.json(dbCast);
     });
 });
 

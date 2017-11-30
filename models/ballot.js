@@ -37,9 +37,13 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'ballot_id',
             onDelete: "cascade"
         });
+        Ballot.hasMany(models.Position, {
+            foreignKey: 'ballot_id',
+            onDelete: "cascade"
+        });
         Ballot.belongsToMany(models.Voter, {
             through: 'Registration',
-            foreignKey: 'voter_id',
+            foreignKey: 'ballot_id',
         });
     };
 
