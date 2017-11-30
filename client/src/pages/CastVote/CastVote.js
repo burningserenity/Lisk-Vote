@@ -5,6 +5,7 @@ import axios from 'axios';
 import API from "../../utils/API";
 import BallotCard from "../../components/BallotCards/BallotCards";
 import BallotBtn from "../../components/BallotCards/BallotBtn";
+import './CastVote.css';
 
 class CastVote extends Component {
 
@@ -83,9 +84,10 @@ class CastVote extends Component {
         return(
             <Container>
                 <Row>
-                    <Col size="md-12">
+                    <Col size="md-6 centered">
+                    <h2>Please Select One Option for Each Issue</h2>
                         {this.state.ballot.length > 0 &&
-                                <div>
+                                <div style={styles.ballotCards.bCard}>
                                 <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
                                 <BallotBtn handleFormSubmit={this.handleFormSubmit}/>
                             </div>
@@ -96,5 +98,17 @@ class CastVote extends Component {
         );
     }
 }
+
+const styles = {
+    ballotCards: {
+        bCard: {
+            marginLeft: '10px',
+            backgroundColor: 'rgba(30, 30, 30, .65)',
+            padding: '30px'
+
+        }
+    }
+}
+
 
 export default CastVote;
