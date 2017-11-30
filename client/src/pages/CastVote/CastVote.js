@@ -62,7 +62,21 @@ class CastVote extends Component {
     handleFormSubmit = e => {
         e.preventDefault();
         console.log("form submit");
-        axios.put(`/api/ballots/vote/${this.state.ballot.id}`, {voter_id: this.state.voter_id, position: this.state.position})
+        console.log(this.state.positions);
+        let positionArr = this.state.positions;
+        let positionOnly = positionArr.map(position => {
+            return position.position
+        });
+        axios({
+            method: 'put',
+            url: `/api/ballots/vote/${this.state.ballot[0].id}`,
+            data: {
+                voter_id: this.state.voter_id,
+                position: positionOnly
+            }
+        }).then(() => {
+            window.location.href = `/registeredvotes/${this.state.voter_id}`;
+        });
     };
 
     render() {

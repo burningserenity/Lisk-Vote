@@ -209,6 +209,7 @@ router.put("/api/ballots/vote/:ballot_id", (req, res) => {
                 res.json(`Voter ${voting.id} is not registered to vote on ballot ${req.params.ballot_id}.`)
             }
             election = voterBallots;
+            console.log(`\n${JSON.stringify(req.body, null, 2)}\n`);
             return req.body.position.forEach(currPosition => {
                 console.log(currPosition);
                 position.findOne({
