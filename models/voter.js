@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
             through: 'Registration',
             foreignKey: 'voter_id'
         });
+        Voter.belongsToMany(models.Ballot, {
+            through: 'VotedOn',
+            foreignKey: 'voter_id'
+        });
     };
 
     return Voter;
