@@ -6,7 +6,7 @@ import "./OpenVotes.css";
 import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
 
-
+//Should look the same as openvotes
 
 class RegisteredVotes extends Component {
 		state = {

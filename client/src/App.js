@@ -8,6 +8,7 @@ import VoteResults from './pages/VoteResults/VoteResults';
 import CastVote from './pages/CastVote/CastVote';
 import NavBar from "./components/Nav";
 
+
 class App extends Component {
 	constructor() {
 		super();
@@ -39,7 +40,7 @@ class App extends Component {
 
 					<Route exact path="/registeredvotes/:id/:voter" component={CastVote} />
 
-					<Route exact path="/voteresults" component={VoteResults} />
+					<Route exact path="/voteresults/:ballot_id?" component={VoteResults} />
 				</Switch>
 
 

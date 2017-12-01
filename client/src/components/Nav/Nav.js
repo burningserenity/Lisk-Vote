@@ -12,7 +12,7 @@ class NavBar extends Component {
 
   render() {
     return(
-    <Navbar inverse>
+    <Navbar inverse style={styles.navBar}>
     <LinkContainer to="/">
       <Navbar.Brand>
         LivBold
@@ -20,6 +20,12 @@ class NavBar extends Component {
       </LinkContainer>
   </Navbar>
     );
+  }
+}
+
+const styles = {
+  navBar: {
+    backgroundColor: 'rgba(30, 30, 30, .95)'
   }
 }
 
