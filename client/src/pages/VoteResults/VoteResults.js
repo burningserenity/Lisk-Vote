@@ -1,10 +1,35 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid/";
 import { Tabs, Tab } from "react-bootstrap";
+import { Doughnut } from 'react-chartjs-2';
 import"./VoteResults.css";
 
 
 class VoteResults extends Component {
+  constructor() {
+    super();
+ this.state = {
+    lables: [
+    'Red',
+    'Green',
+    'Yellow'
+    ],
+    datasets: [{
+      data: [300, 50, 100],
+      backgroundColor: [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56'
+      ],
+      hoverBackgroundColor : [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56'
+      ]
+    }]
+  }
+}
+
 
 render() {
 	return(
@@ -18,6 +43,9 @@ render() {
   <div className="card-header">
     Vote Results
   </div>
+
+<Doughnut data={this.state}/>
+
   <div className="card-body">
   <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
     <Tab eventKey={1} title="Tab 1">Tab 1 content</Tab>
