@@ -11,20 +11,17 @@ class VoteResults extends Component {
     super();
  this.state = {
   ballot:[],
-    lables: [
+    labels: [
 
     ],
     issue_nameArray: [],
-
-    datasets: [{
-      data: [],
-      backgroundColor: [
-
-      ],
-      hoverBackgroundColor : [
-
-      ]
-    }]
+    chart: {
+      datasets: [{
+        data: [],
+        backgroundColor: [],
+        hoverBackgroundColor : []
+      }]
+  }
   }
 }
 
@@ -45,10 +42,11 @@ getChartData(issue) {
 
     let update = this.state.chart;
 
+
     update.labels = labels;
     update.datasets[0].data = values;
     update.datasets[0].backgroundColor = bgColors;
-
+console.log(JSON.stringify(update, null, 2));
     this.setState({
      chart: update
     });
@@ -57,29 +55,30 @@ getChartData(issue) {
 
 
 loopIssues = (ballot) => {
-  if (this.state.ballot.length > 0) {
+  console.log(ballot);
+  if (ballot) {
   let issue_nameArray = this.state.issue_nameArray;
-    ballot[0].Issues.forEach(issue => {
-      issue.issue_name.push(issue_nameArray);
+    ballot.Issues.forEach(issue => {
+      console.log(issue.issue_name);
+      issue_nameArray.push(issue.issue_name);
       this.getChartData(issue);
     })
     }
 }
 
    loadBallot = () => {
-        API.getBallot(this.props.match.params.id)
+        API.getBallot(this.props.match.params.ballot_id)
             .then( res => {
                 this.setState({ballot: [res.data]});
+                this.loopIssues(this.state.ballot[0])
+                console.log("Load ballot" + JSON.stringify(this.state.ballot, null, 2));
             })
             .catch(err => console.log(err));
     };
 
-  componentWillMount() {
-    this.loadBallot();
-  }
 
   componentDidMount() {
-    this.getChartData();
+    this.loadBallot();
   }
 
 render() {
