@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Col, Row, Container } from "../../components/Grid/";
-import { FormBtn, Input , Checkbtn } from "../../components/Form/";
-import { FormGroup, Select,FormControl,ListGroup,ListGroupItem } from 'react-bootstrap';
+import { Checkbtn } from "../../components/Form/";
+import { JumboBtn } from "../../components/Jumbotron/"
+import { FormControl, ListGroup, ListGroupItem } from 'react-bootstrap';
 import axios from 'axios';
 import API from "../../utils/API";
-import BallotCard from "../../components/BallotCards/BallotCards";
-import BallotBtn from "../../components/BallotCards/BallotBtn";
-//import  { Link } from 'react-router-dom';
-//import './CastVote.css';
 
 class VoterRegistration extends Component {
 
@@ -81,11 +78,11 @@ class VoterRegistration extends Component {
           <Container>
              <Row>
                 <Col size="md-12">
-                  <h1>Voters Registration</h1>
+                  <h1>Assign A Ballot</h1>
                 </Col>
              </Row>
              <Row>
-               <Col size="md-6">
+               <Col size="md-5.5" style={styles.registration.regCard} centered>
                  <h2>Select a Ballots to Register Voters:</h2>
                     {this.state.ballots ? (
                       <ListGroup>
@@ -95,16 +92,16 @@ class VoterRegistration extends Component {
                                    Ballot Name/Topic: {ballot.ballot_name} <br/> Ballot Expires: {ballot.ballot_expiration}
                                  </strong>
                                  <Checkbtn onClick={() => this.loadVoters({ballot : ballot.id})}>
-                                 </Checkbtn>   
+                                 </Checkbtn>
                            </ListGroupItem>
-                           
+
                         ))}
                       </ListGroup>
                     ) : (
                         <h3>No Results to Display</h3>
                     )}
                </Col>
-               <Col size="md-6">
+               <Col size="md-5.5" style={styles.registration.regCard} centered>
                  <h2>Select Voters for Ballot:</h2>
                  {this.state.Voter ? (
                      <FormControl componentClass="select" onChange={this.handleSelect.bind(this)} name="FormControl">
@@ -117,23 +114,22 @@ class VoterRegistration extends Component {
                     <h3>No Voters</h3>
                  )}
                </Col>
-             </Row>
-              <Row styles ="width:100%;align-items: center;justify-content: center;">
-               <Col size="md-12">
-                 <FormBtn
+               <Col size="md-11" style={{ marginTop: '10px' }}>
+                 <JumboBtn
                    disabled={!(this.state.FormControl)}
                    onClick={this.handleFormSubmit}>
-                 </FormBtn>
+                 </JumboBtn>
                </Col>
-             </Row>  
+
+             </Row>
           </Container>
         );
     }
  }
 const styles = {
-    ballotCards: {
-        bCard: {
-            marginLeft: '10px',
+    registration: {
+        regCard: {
+          marginLeft: '5px',
             backgroundColor: 'rgba(30, 30, 30, .65)',
             padding: '30px'
 

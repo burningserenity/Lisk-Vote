@@ -17,7 +17,6 @@ class VoteResults extends Component {
             chartArr: []
         }
     }
-
     getChartData(issue) {
         console.log("Issue to go in chart: " + JSON.stringify(issue, null, 2));
         let labels = [];
