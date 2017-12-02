@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 import { FormBtn, Input } from "../../components/Form/";
 import { Col, Row, Container } from "../../components/Grid/";
-import { Link } from "react-router-dom";
 import { Jumbotron } from "../../components/Jumbotron";
 import axios from "axios";
 import "./NewUser.css";
