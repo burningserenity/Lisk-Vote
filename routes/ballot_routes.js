@@ -95,6 +95,34 @@ router.post("/api/ballots", (req, res) => {
     });
 });
 
+// Add a new ballot with issues and positions on the issues
+/*router.post("/api/ballots", (req, res) => {
+    ballot.create({
+        ballot_name: req.body.ballot_name,
+        ballot_active: req.body.ballot_active,
+        ballot_start: req.body.ballot_start,
+        ballot_expiration: req.body.ballot_expiration,
+        ballot_registered_voters: req.body.ballot_registered_voters
+    }).then(dbBallot => {
+        return req.body.Issues.Issues.forEach((i, dbIssue) => {
+            issue.create({
+                issue_name: dbIssue[i].issue_name,
+                ballot_id: dbBallot.id
+            });
+        });
+    }).then(dbIssue => {
+        return req.body.Positions.Positions.forEach((i, dbPosition) => {
+            position.create({
+                position_name: dbPosition[i].position_name,
+                ballot_id: dbPosition[i].ballot_id,
+                issue_id: dbPosition[i].issue_id
+            });
+        });
+    }).then(() => {
+        res.redirect("/api/ballots");
+    });
+}); */
+
 // Delete a ballot ---- not necessary to implement
 router.delete("/api/ballots/:id", (req, res) => {
     ballot.destroy({
