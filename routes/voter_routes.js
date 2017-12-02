@@ -122,4 +122,7 @@ router.put("/api/voters/stake/:address", (req, res) => {
     });
 });
 
+// TODO: Get voters not registered for a ballot
+// TODO: Prevent voters from being re-registered for the same ballot
+
 module.exports = router;

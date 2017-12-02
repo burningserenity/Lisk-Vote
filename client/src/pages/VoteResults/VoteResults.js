@@ -14,13 +14,6 @@ class VoteResults extends Component {
 
             ],
             issue_nameArray: [],
-            chart: {
-                datasets: [{
-                    data: [],
-                    backgroundColor: [],
-                    hoverBackgroundColor : []
-                }]
-            },
             chartArr: []
         }
     }
@@ -31,7 +24,7 @@ class VoteResults extends Component {
         let values = [];
         let bgColors = [];
 
-        const getRanColor = () => `#${(Math.random() * 0xFFFFFF << 0).toString(16)}`;
+        const getRanColor = () => `#${Math.floor(Math.random() * 0xFFFFFF).toString(16)}`;
 
         if (this.state.ballot.length) {
             // Loop through positions through request
@@ -41,13 +34,16 @@ class VoteResults extends Component {
                 bgColors.push(getRanColor());
             });
 
-            let update = this.state.chart;
+            let update = {
+                id: issue.id,
+                datasets: [{
+                    data: values,
+                    backgroundColor: bgColors,
+                }]
+            };
             console.log(JSON.stringify(update, null, 2));
 
-
-            update.labels = labels;
-            update.datasets[0].data = values;
-            update.datasets[0].backgroundColor = bgColors;
+            console.log("Get chart data: "+ JSON.stringify(issue, null ,2));
             let chartArr = this.state.chartArr;
             chartArr.push(update);
             console.log(JSON.stringify(chartArr, null, 2));
@@ -86,6 +82,7 @@ class VoteResults extends Component {
     }
 
     render() {
+        console.log(this.state.chartArr);
         return(
             <Container>
                 <Row>
@@ -98,11 +95,13 @@ class VoteResults extends Component {
                     Vote Results
                 </div>
             <p>{JSON.stringify(this.state.chart, null, 2)}</p>
+        
             {this.state.chartArr.length ? (
                 <div>
-                    {this.state.chartArr.map(chart => (
-                        <Doughnut key='datasets' data={chart.datasets}/>
-                    ))}
+                    {this.state.chartArr.map(chart => 
+                        {console.log('chart data = : ' + JSON.stringify(chart, null, 2));
+                        return (<Doughnut key={chart.id} data={chart}/>);}
+                    )}
                 </div>
             ) : (
                 <h1>No Results: {JSON.stringify(this.state.chartArr, null, 2)}</h1>
