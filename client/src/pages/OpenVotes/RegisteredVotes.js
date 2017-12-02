@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Row, Container } from "../../components/Grid/";
 import API from "../../utils/API";
-import { BallotCards, BallotBtn } from "../../components/BallotCards/";
 import "./OpenVotes.css";
-import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
 
 //Should look the same as openvotes
@@ -22,7 +21,7 @@ class RegisteredVotes extends Component {
 			.then( res => {
                 let activeBallots = [];
                 let inactiveBallots = [];
-                let registeredBallots = [];
+                /*let registeredBallots = [];*/
                 res.data.forEach(element => {
                     element.ballot_active ? activeBallots.push(element) : inactiveBallots.push(element)
                     console.log(`Active ballots: \n ${JSON.stringify(activeBallots, null, 2)}`);
