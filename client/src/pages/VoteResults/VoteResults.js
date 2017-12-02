@@ -29,7 +29,7 @@ class VoteResults extends Component {
             // Loop through positions through request
             issue.Positions.forEach(position => {
                 labels.push(position.position_name);
-                values.push(position.position_tally * 10);
+                values.push(position.position_tally);
                 bgColors.push(getRanColor());
             });
 
@@ -83,9 +83,13 @@ class VoteResults extends Component {
                         <div className="row justify-content-center">
 
             <div className="card text-center" style={styles.card}>
+                    {this.state.ballot.length ? (
                 <div className="card-header" style={styles.header}>
-                    Vote Results
-                </div>
+                        Results of {this.state.ballot[0].ballot_name}
+                </div> ) : (
+                <div className="card-header" style={styles.header}>
+                    Loading
+                </div>)}
             {this.state.chartArr.length ? (
                 <div>
                     {this.state.chartArr.map(chart => 
@@ -102,9 +106,15 @@ class VoteResults extends Component {
 
 
                 </div>
+                {this.state.ballot.length? (
                 <div className="card-footer text-muted">
-                    Days left to vote: 2
+                    Voting closes: {this.state.ballot[0].ballot_expiration}
                 </div>
+                ) : (
+                <div className="card-footer text-muted">
+                    Voting closes: 
+                </div>
+                )}
             </div>
 
         </div>
