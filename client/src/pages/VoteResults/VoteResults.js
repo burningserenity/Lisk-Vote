@@ -29,7 +29,7 @@ getChartData(issue) {
     let values = [];
     let bgColors = [];
 
-    const getRanColor = () => `#${(Math.random() * 0xFFFFFF << 0).toString(16)}`;
+    const getRanColor = () => `#${(Math.random() * 0xFFFFFF).toString(16)}`;
 
   if (this.state.ballot.length > 0) {
     // Loop through positions through request
