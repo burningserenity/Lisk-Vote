@@ -94,10 +94,10 @@ class VoteResults extends Component {
                     Vote Results
                 </div>
             <p>{JSON.stringify(this.state.chart, null, 2)}</p>
-        
+
             {this.state.chartArr.length ? (
                 <div>
-                    {this.state.chartArr.map(chart => 
+                    {this.state.chartArr.map(chart =>
                         {console.log('chart data = : ' + JSON.stringify(chart, null, 2));
                         return (<Doughnut key={chart.id} data={chart}/>);}
                     )}
@@ -108,7 +108,7 @@ class VoteResults extends Component {
                 <div className="card-body">
 
                     <h4 className="card-title">Here are the Results for the Ballot you selected</h4>
-                    <p className="card-text">All voters are kept annonymous to ensure validity of votes.</p>
+                    <p className="card-text">All voters are kept anonymous to ensure validity of votes.</p>
 
 
                 </div>
