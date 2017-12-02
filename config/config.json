@@ -14,10 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": null,
-    "database": "postgresql-curly-32636",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+      "use_env_variable": "heroku-postgresql_URL",
+      "dialect": "postgres"
   }
 }
