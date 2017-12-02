@@ -38,7 +38,8 @@ class VoteResults extends Component {
                 datasets: [{
                     data: values,
                     backgroundColor: bgColors,
-                }]
+                }],
+                labels: labels
             };
             let chartArr = this.state.chartArr;
             chartArr.push(update);
