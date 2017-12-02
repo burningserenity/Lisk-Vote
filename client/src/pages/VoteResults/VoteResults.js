@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid/";
-import { Tabs, Tab } from "react-bootstrap";
 import { Doughnut } from 'react-chartjs-2';
 import"./VoteResults.css";
 import API from "../../utils/API";

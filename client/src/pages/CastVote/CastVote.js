@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Col, Row, Container } from "../../components/Grid/"
-import { ListGroup, ListGroupItem, Table, Panel, FormGroup, Radio } from 'react-bootstrap';
 import axios from 'axios';
 import API from "../../utils/API";
 import BallotCard from "../../components/BallotCards/BallotCards";
@@ -41,7 +40,7 @@ class CastVote extends Component {
             console.log('positions: ' + JSON.stringify(positionsArr, null, 2));
             positionsArr.forEach((position, i) => {
                 console.log(`does ${position.issue} equal ${prop.issue} ?`);
-                if (position.issue == prop.issue) {
+                if (position.issue === prop.issue) {
                     console.log(`i == ${i}`);
                     positionsArr.splice(positionsArr[i], 1);
                 }

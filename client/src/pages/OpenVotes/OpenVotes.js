@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Row, Container } from "../../components/Grid/";
 import API from "../../utils/API";
-import { BallotCards, BallotBtn } from "../../components/BallotCards/";
 import "./OpenVotes.css";
-import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import  { Link } from 'react-router-dom';
 
 

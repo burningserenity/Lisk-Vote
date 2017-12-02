@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Table, Panel, FormGroup, Radio } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import Issue from "./Issues"
 
 const BallotCard = props =>
