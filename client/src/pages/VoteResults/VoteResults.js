@@ -17,8 +17,8 @@ class VoteResults extends Component {
             chartArr: []
         }
     }
+
     getChartData(issue) {
-        console.log("Issue to go in chart: " + JSON.stringify(issue, null, 2));
         let labels = [];
         let values = [];
         let bgColors = [];
@@ -40,12 +40,8 @@ class VoteResults extends Component {
                     backgroundColor: bgColors,
                 }]
             };
-            console.log(JSON.stringify(update, null, 2));
-
-            console.log("Get chart data: "+ JSON.stringify(issue, null ,2));
             let chartArr = this.state.chartArr;
             chartArr.push(update);
-            console.log(JSON.stringify(chartArr, null, 2));
             this.setState({
                 chartArr: chartArr
             });
@@ -54,13 +50,10 @@ class VoteResults extends Component {
 
 
     loopIssues = (ballot) => {
-        console.log(ballot);
         if (ballot) {
             let issue_nameArray = this.state.issue_nameArray;
             ballot.Issues.forEach(issue => {
-                console.log(issue.issue_name);
                 issue_nameArray.push(issue.issue_name);
-                console.log('<namearray>' + JSON.stringify(issue_nameArray, null, 2) + '</namearray>');
                 this.getChartData(issue);
             })
         }
@@ -81,7 +74,6 @@ class VoteResults extends Component {
     }
 
     render() {
-        console.log(this.state.chartArr);
         return(
             <Container>
                 <Row>
@@ -93,13 +85,10 @@ class VoteResults extends Component {
                 <div className="card-header" style={styles.header}>
                     Vote Results
                 </div>
-            <p>{JSON.stringify(this.state.chart, null, 2)}</p>
-        
             {this.state.chartArr.length ? (
                 <div>
                     {this.state.chartArr.map(chart => 
-                        {console.log('chart data = : ' + JSON.stringify(chart, null, 2));
-                        return (<Doughnut key={chart.id} data={chart}/>);}
+                        (<Doughnut key={chart.id} data={chart}/>)
                     )}
                 </div>
             ) : (
@@ -108,7 +97,7 @@ class VoteResults extends Component {
                 <div className="card-body">
 
                     <h4 className="card-title">Here are the Results for the Ballot you selected</h4>
-                    <p className="card-text">All voters are kept annonymous to ensure validity of votes.</p>
+                    <p className="card-text">All voters are kept anonymous to ensure validity of votes.</p>
 
 
                 </div>
