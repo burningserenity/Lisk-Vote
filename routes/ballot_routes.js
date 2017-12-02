@@ -127,6 +127,9 @@ router.put("/api/ballots/:id", (req, res) => {
 router.put("/api/ballots/register/:id", (req, res) => {
     let selBallot = {};
     let registration = {};
+    console.log(req.body.id);
+    console.log(req.body.voter_id);
+    console.log(req.params.id);
     sequelize.transaction().then(go => {
         return ballot.findOne({
             where: {
