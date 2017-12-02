@@ -1,11 +1,13 @@
 const voter = require('../models').Voter;
+const ballot = require("../models").Ballot;
+const registration = require("../models").Registration;
 const router = require("express").Router();
 const path = require('path');
 
 // Select all voters
 router.get("/api/voters/all", (req, res) => {
     voter.findAll().then(dbVoter => {
-        console.log(dbVoter);
+        //console.log(dbVoter);
         res.json(dbVoter);
     });
 });
@@ -105,6 +107,7 @@ router.put("/api/voters", (req, res) => {
             res.json(dbVoter);
     });
 });
+
 
 // Change a voter's stake
 router.put("/api/voters/stake/:address", (req, res) => {
