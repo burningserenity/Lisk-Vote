@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use("/", voter_routes, ballot_routes, issue_routes);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, indexPath));
+    res.sendFile(indexPath + '/index.html');
 });
 
 console.log(`Listening on port ${port}...`);
