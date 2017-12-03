@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "client": "concurrently \"npm run server\" \"cd client && npm start\""
   },
   "keywords": [
     "lisk",
