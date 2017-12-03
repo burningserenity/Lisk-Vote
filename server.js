@@ -15,7 +15,6 @@ app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(express.static('client/build'));
 
-app.use(express.static('public'));
 app.use(methodOverride("_method"));
 
 const db = require("./models");
@@ -23,18 +22,10 @@ const voter_routes = require("./routes/voter_routes.js");
 const ballot_routes = require("./routes/ballot_routes.js");
 const issue_routes = require("./routes/issue_routes.js");
 
-let indexPath = 'client/public';
-
-// This is supposed to serve the built react app
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-    indexPath = 'client/build';
-}
-
 app.use("/", voter_routes, ballot_routes, issue_routes);
 
 app.get("*", (req, res) => {
-    res.sendFile(indexPath + '/index.html');
+    res.sendFile('index.html');
 });
 
 console.log(`Listening on port ${port}...`);
