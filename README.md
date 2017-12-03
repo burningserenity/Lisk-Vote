@@ -6,8 +6,11 @@ To get started, make sure you have NodeJS version 8.9 or higher, and Postgres ve
 Open a terminal window in the app's route directory. Run the following: 
 
 createdb liskvote_development
+
 createdb postgres
+
 npm i && cd client && npm i && cd ..
+
 npm start
 
 Follow the link to create a user. You must enter a passphrase; all other fields are optional. A user will be created with a unique, tentative blockchain address.
