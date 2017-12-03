@@ -23,10 +23,18 @@ const voter_routes = require("./routes/voter_routes.js");
 const ballot_routes = require("./routes/ballot_routes.js");
 const issue_routes = require("./routes/issue_routes.js");
 
+let indexPath = './client/public/index.html';
+
+// This is supposed to serve the built react app
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    indexPath = './client/build/index.html';
+}
+
 app.use("/", voter_routes, ballot_routes, issue_routes);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, './client/public/index.html'));
+    res.sendFile(path.join(__dirname, indexPath));
 });
 
 console.log(`Listening on port ${port}...`);
