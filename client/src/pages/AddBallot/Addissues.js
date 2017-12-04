@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { FormBtn, Input } from "../../components/Form/";
-import {List} from "react-bootstrap";
 
 class AddIssues extends Component {
    constructor() {
@@ -9,6 +7,7 @@ class AddIssues extends Component {
         this.state = {
             submitted: false,
             submitted2: false,
+            option:[],
             inputs:[]
         };
     }
@@ -26,6 +25,13 @@ class AddIssues extends Component {
             return;
     });
     //$('.online-est').next('.room-form').remove();
+  };
+
+  handleOptionsChange = (index,event) => {
+    
+    var option = this.state.option.slice();
+    option[index] = event.target.value;
+    this.setState({option:option})
   };
 
   handleInputChange = event => {
@@ -64,7 +70,7 @@ class AddIssues extends Component {
                {this.state.inputs.map(item => (
                     <ul key={item} id={item}>
                       <li>
-                        <input type="text" ref={'name'+[item]} defaultValue={this.props.fieldValues.options[item]}/>
+                        <input type="text" ref={'name'+[item]} name={'option'+[item]} defaultValue={this.props.fieldValues.options[item]} value={this.state.option[item]} onChange={this.handleOptionsChange.bind(this, item)}/>
                       </li>
                     </ul>
                   ))}
@@ -80,14 +86,11 @@ class AddIssues extends Component {
   nextStep = ()=> {
     // Get values via querySelector
     this.props.fieldValues.issue_name = this.issue_name.value;
-    console.log(this.state.options);
-    //const options = this.props.fieldValues.options.map();
-    
-    //console.log(options);
-
+    this.props.fieldValues.options = this.state.option;
+    console.log(this.state.option);
     var data = {
       issue_name : this.issue_name.value,
-      options : this.state.options
+      options : this.state.option
     }
     console.log(data);
     this.props.saveValues(data) 

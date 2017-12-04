@@ -4,7 +4,7 @@ import Success from "./Success";
 import Confirmation from "./Confirmation";
 import Ballotinfo from "./Ballotinfo";
 import AddIssues from "./Addissues";
-import assign from "object-assign";
+import axios from 'axios';
 import Moment from 'moment';
 //import "./NewUser.css";
 
@@ -38,7 +38,6 @@ class AddBallot extends Component {
 
 
     saveValues = (field_Value) => {
-    console.log(field_Value);
     return function() {
       const fieldValues = Object.assign({}, fieldValues, field_Value);
     }
@@ -59,7 +58,20 @@ class AddBallot extends Component {
 
    
     SubmitRegistration = () => {
-        this.nextStep();
+    console.log("Me llamaron");
+    console.log(this.props.fieldValues);
+    if (this.props.fieldValues) {
+        console.log(this.props.fieldValues);
+         axios({
+            method: 'post',
+            url: `/api/ballots/register/`,
+            data: {
+                ballot_name: this.props.fieldValues.ballot_name,
+            }
+        }).then(() => {
+            this.nextStep();
+        });
+     }
     };
 
     renderSwitch = () => {
@@ -80,6 +92,11 @@ class AddBallot extends Component {
                              submitRegistration={this.nextStep} />
       case 4:
         return <Success fieldValues={fieldValues} />
+      
+      default: <Ballotinfo  fieldValues={fieldValues}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
+                            saveValues={this.saveValues} />
       }
     };
 

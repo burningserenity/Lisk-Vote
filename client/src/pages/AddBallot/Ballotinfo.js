@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import {FormGroup} from "react-bootstrap";
 import Moment from 'moment';
 import DateTimePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-import axios from "axios";
-//import "./NewUser.css";
 
 class Ballotinfo extends Component {
 constructor() {
