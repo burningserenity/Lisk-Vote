@@ -83,7 +83,7 @@ class VoterRegistration extends Component {
              </Row>
              <Row>
                <Col size="md-6 centered" style={styles.registration.regCard}>
-                 <h2>Select a Ballots to Register Voters:</h2>
+                 <h2>Select a Ballot to Register Voters for:</h2>
                     {this.state.ballots ? (
                       <ListGroup>
                         {this.state.ballots.map(ballot => (
@@ -106,7 +106,7 @@ class VoterRegistration extends Component {
                     )}
                </Col>
                <Col size="md-6 centered" style={styles.registration.regCard}>
-                 <h2>Select Voters for Ballot:</h2>
+                 <h2>Select a Voter to Register for a Ballot:</h2>
                  {this.state.Voter ? (
                      <FormControl componentClass="select" onChange={this.handleSelect.bind(this)} name="FormControl">
                       {this.state.Voter.map((Voter) => {

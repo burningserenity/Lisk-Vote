@@ -116,7 +116,7 @@ class VoteResults extends Component {
                 </div>
                 ) : (
                 <div className="card-footer text-muted">
-                    Voting closes: 
+                    Voting closes:
                 </div>
                 )}
             </div>
@@ -135,7 +135,8 @@ const styles = {
         backgroundColor: 'rgba(30, 30, 30, .65)'
     },
     header: {
-        backgroundColor: 'rgba(30, 30, 30, .85)'
+        backgroundColor: 'rgba(30, 30, 30, .85)',
+        fontSize: '30px'
     }
 }
 
