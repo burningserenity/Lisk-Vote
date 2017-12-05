@@ -91,9 +91,36 @@ router.post("/api/ballots", (req, res) => {
         ballot_registered_voters: req.body.ballot_registered_voters
     }).then(dbBallot => {
         console.log(dbBallot);
-        res.json(dbBallot);
     });
 });
+
+// Add a new ballot with issues and positions on the issues
+/*router.post("/api/ballots", (req, res) => {
+    ballot.create({
+        ballot_name: req.body.ballot_name,
+        ballot_active: req.body.ballot_active,
+        ballot_start: req.body.ballot_start,
+        ballot_expiration: req.body.ballot_expiration,
+        ballot_registered_voters: req.body.ballot_registered_voters
+    }).then(dbBallot => {
+        return req.body.Issues.Issues.forEach((i, dbIssue) => {
+            issue.create({
+                issue_name: dbIssue[i].issue_name,
+                ballot_id: dbBallot.id
+            });
+        });
+    }).then(dbIssue => {
+        return req.body.Positions.Positions.forEach((i, dbPosition) => {
+            position.create({
+                position_name: dbPosition[i].position_name,
+                ballot_id: dbPosition[i].ballot_id,
+                issue_id: dbPosition[i].issue_id
+            });
+        });
+    }).then(() => {
+        res.redirect("/api/ballots");
+    });
+}); */
 
 // Delete a ballot ---- not necessary to implement
 router.delete("/api/ballots/:id", (req, res) => {
@@ -226,9 +253,25 @@ router.put("/api/ballots/vote/:ballot_id", (req, res) => {
                 });
             });
         }).then(() => {
+            console.log(election);
+            console.log(election);
+            console.log(election);
+            console.log(election);
+            console.log(election);
+            return ballot.update({
+                ballot_casts: (parseInt(election[0].ballot_casts) + 1)
+            }, {
+                where: {
+                    id: election[0].id
+                }
+            });
+        }).then(() => {
             return voting.removeBallot(election);
         }).then(() => go.commit())
-            .catch(err => console.error("Ballot cast failed: ", err));
+            .catch(err => {
+                go.rollback();
+                console.error("Ballot cast failed: ", err)}
+            );
     }).then(dbCast => {
         console.log(dbCast);
         res.json(dbCast);
