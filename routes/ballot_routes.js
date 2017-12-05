@@ -91,7 +91,6 @@ router.post("/api/ballots", (req, res) => {
         ballot_registered_voters: req.body.ballot_registered_voters
     }).then(dbBallot => {
         console.log(dbBallot);
-        res.json(dbBallot);
     });
 });
 
@@ -254,9 +253,25 @@ router.put("/api/ballots/vote/:ballot_id", (req, res) => {
                 });
             });
         }).then(() => {
+            console.log(election);
+            console.log(election);
+            console.log(election);
+            console.log(election);
+            console.log(election);
+            return ballot.update({
+                ballot_casts: (parseInt(election[0].ballot_casts) + 1)
+            }, {
+                where: {
+                    id: election[0].id
+                }
+            });
+        }).then(() => {
             return voting.removeBallot(election);
         }).then(() => go.commit())
-            .catch(err => console.error("Ballot cast failed: ", err));
+            .catch(err => {
+                go.rollback();
+                console.error("Ballot cast failed: ", err)}
+            );
     }).then(dbCast => {
         console.log(dbCast);
         res.json(dbCast);

@@ -38,9 +38,7 @@ class CastVote extends Component {
         if (positionsArr.length > 0) {
             console.log('positions: ' + JSON.stringify(positionsArr, null, 2));
             positionsArr.forEach((position, i) => {
-                console.log(`does ${position.issue} equal ${prop.issue} ?`);
                 if (position.issue === prop.issue) {
-                    console.log(`i == ${i}`);
                     positionsArr.splice(positionsArr[i], 1);
                 }
             });
@@ -66,15 +64,8 @@ class CastVote extends Component {
         let positionOnly = positionArr.map(position => {
             return position.position
         });
-        axios({
-            method: 'put',
-            url: `/api/ballots/vote/${this.state.ballot[0].id}`,
-            data: {
-                voter_id: this.state.voter_id,
-                position: positionOnly
-            }
-        }).then(() => {
-            window.location.href = `/registeredvotes/${this.state.voter_id}`;
+        API.castVote(`/api/ballots/vote/${this.state.ballot[0].id}`, this.state.voter_id, positionOnly).then(() => {
+            window.location.href = `/voteresults/${this.props.match.params.id}`;
         });
     };
 
@@ -83,15 +74,15 @@ class CastVote extends Component {
             <Container>
                 <Row>
                     <Col size="md-6 centered">
-                    <h2 style={styles.ballotCards.heading}>Please Select One Option <br /> for Each Issue</h2>
-                        {this.state.ballot.length > 0 &&
-                                <div style={styles.ballotCards.bCard}>
-                                <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
-                                <BallotBtn handleFormSubmit={this.handleFormSubmit}/>
-                            </div>
-                        }
-                    </Col>
-                </Row>
+                        <h2 style={styles.ballotCards.heading}>Please Select One Option <br /> for Each Issue</h2>
+            {this.state.ballot.length > 0 &&
+                <div style={styles.ballotCards.bCard}>
+                <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
+                <BallotBtn handleFormSubmit={this.handleFormSubmit}/>
+                </div>
+            }
+            </Col>
+            </Row>
             </Container>
         );
     }

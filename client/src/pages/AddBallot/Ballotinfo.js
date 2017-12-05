@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Moment from 'moment';
 import DateTimePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import API from "../../utils/API";
 
 class Ballotinfo extends Component {
 constructor() {
@@ -75,7 +76,8 @@ handleInputChange = event => {
         ballot_expiration: this.props.fieldValues.ballot_expiration,
      }
     //console.log(data);
-    this.props.saveValues(data)
+      this.props.saveValues(data);
+
     this.props.nextStep()
   }
 };
