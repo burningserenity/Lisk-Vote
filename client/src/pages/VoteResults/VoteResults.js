@@ -92,9 +92,13 @@ class VoteResults extends Component {
                 </div>)}
             {this.state.chartArr.length ? (
                 <div>
-                    {this.state.chartArr.map(chart =>
-                        (<Doughnut key={chart.id} data={chart}/>)
-                    )}
+                    {this.state.chartArr.map(chart => 
+                        (
+                            <div>
+                                <h6>{this.state.issue_nameArray[this.state.chartArr.indexOf(chart)]}</h6>
+                                <Doughnut key={chart.id} data={chart}/>
+                            </div>
+                    ))}
                 </div>
             ) : (
                 <h1>No Results: {JSON.stringify(this.state.chartArr, null, 2)}</h1>
