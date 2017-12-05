@@ -253,11 +253,6 @@ router.put("/api/ballots/vote/:ballot_id", (req, res) => {
                 });
             });
         }).then(() => {
-            console.log(election);
-            console.log(election);
-            console.log(election);
-            console.log(election);
-            console.log(election);
             return ballot.update({
                 ballot_casts: (parseInt(election[0].ballot_casts) + 1)
             }, {
