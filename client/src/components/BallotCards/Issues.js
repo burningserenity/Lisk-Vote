@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, FormGroup, Radio, bsStyle } from 'react-bootstrap';
+import { FormGroup, Radio } from 'react-bootstrap';
+import './BallotCards.css';
 
 const Issue = props =>
     <div className="card border-info" style={styles.voteCard.spacing}>
@@ -7,16 +8,17 @@ const Issue = props =>
             <div>
             <h3 className="card-header">{props.ballot_name}
             </h3>
-               <strong style={styles.voteCard.text}>Issue Title: </strong>
+               <strong style={styles.voteCard.text2}>Issue Title: </strong>
                 <p style={styles.voteCard.text}>{props.issue.issue_name}</p>
                 <hr style={styles.voteCard.line} />
                 <FormGroup>
+                <strong style={styles.voteCard.text2}>Options: </strong>
                     {props.issue.Positions.map(position => (
-                        <Radio style={styles.voteCard.radio} key={position.id} name={`radioGroup-${props.issue.id}`} onClick={props.onClick.bind(this)} id={`p-${position.id}`} value={`${props.issue.id},${position.id}`}>{position.position_name}</Radio>
+                        <Radio style={styles.voteCard.text3} key={position.id} name={`radioGroup-${props.issue.id}`} onClick={props.onClick.bind(this)} id={`p-${position.id}`} value={`${props.issue.id},${position.id}`}>{position.position_name}</Radio>
                     ))}
                 </FormGroup>
 
-                Expires: {props.ballot_expiration}
+                <p style={styles.voteCard.text4}>Expires: {props.ballot_expiration}</p>
                  </div>
         }
     </div>;
@@ -29,15 +31,23 @@ const Issue = props =>
                 backgroundColor: 'rgba(30, 30, 30, .65)'
             },
             text: {
-                fontSize: '18px'
+                fontSize: '18px',
+                color: 'aquamarine'
+            },
+            text2: {
+                fontSize: '20px',
+                textDecoration: 'underline'
+            },
+            text3: {
+                fontSize: '16px'
+            },
+            text4: {
+                color: '#3498DB'
             },
             line: {
                     height: '10px',
                     border: '0',
                     boxShadow: '0 10px 10px -10px #8c8b8b inset'
-            },
-            radio: {
-                marginRight: '10px'
             }
         }
     }

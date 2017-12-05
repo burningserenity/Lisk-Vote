@@ -18,6 +18,7 @@ export default {
         console.log(data);
         return axios.put("/api/ballots/register/:id" + data);
     },
+<<<<<<< HEAD
     createBallot: function(ballot) {
         console.log(ballot);
         return axios({
