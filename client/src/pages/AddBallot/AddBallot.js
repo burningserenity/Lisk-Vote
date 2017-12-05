@@ -3,7 +3,7 @@ import { Container } from "../../components/Grid/";
 import Success from "./Success";
 import Confirmation from "./Confirmation";
 import Ballotinfo from "./Ballotinfo";
-import AddIssues from "./Addissues";
+import AddIssues2 from "./Addissues2";
 import axios from 'axios';
 import Moment from 'moment';
 //import "./NewUser.css";
@@ -11,9 +11,11 @@ import Moment from 'moment';
 const fieldValues = {
   ballot_name  : null,
   ballot_start : Moment(),
-  ballot_expiration : Moment().add(1, 'day'),
-  issue_name   : [],
-  options   : []
+  ballot_expiration : Moment().add( 1, 'day'),
+  issues: [{
+           issue_name:null,
+           options:[]
+           }],
 }
 
 class AddBallot extends Component {
@@ -23,9 +25,7 @@ class AddBallot extends Component {
 
         this.state = {
             step: 1
-          //  name: null,
-          //  password : null,
-        };
+        };  
     }
        
     handleChange(e) {
@@ -82,7 +82,7 @@ class AddBallot extends Component {
                             previousStep={this.previousStep}
                             saveValues={this.saveValues} />
       case 2:
-        return <AddIssues   fieldValues={fieldValues}
+        return <AddIssues2   fieldValues={fieldValues}
                             nextStep={this.nextStep}
                             previousStep={this.previousStep}
                             saveValues={this.saveValues} />

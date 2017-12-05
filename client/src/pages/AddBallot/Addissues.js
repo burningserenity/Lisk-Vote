@@ -24,7 +24,7 @@ class AddIssues extends Component {
     this.setState({ inputs: this.state.inputs.concat(newInput)},function(){
             return;
     });
-    //$('.online-est').next('.room-form').remove();
+    
   };
 
   handleOptionsChange = (index,event) => {
