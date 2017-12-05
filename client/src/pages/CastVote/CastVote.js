@@ -82,7 +82,7 @@ class CastVote extends Component {
         return(
             <Container>
                 <Row>
-                    <Col size="md-6 centered">
+                    <Col size="md-8 centered">
                     <h2 style={styles.ballotCards.heading}>Please Select One Option <br /> for Each Issue</h2>
                         {this.state.ballot.length > 0 &&
                                 <div style={styles.ballotCards.bCard}>
@@ -107,7 +107,11 @@ const styles = {
             textAlign: 'center',
             backgroundColor: 'rgba(30, 30, 30, .65)',
             marginTop: '10px',
-            padding: '10px'
+            padding: '10px',
+            border: 'solid',
+            borderColor: '#3498DB',
+            borderWidth: '1px',
+            borderRadius: '0.25rem'
         }
     }
 }
