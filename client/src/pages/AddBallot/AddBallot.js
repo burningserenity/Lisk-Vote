@@ -3,17 +3,19 @@ import { Container } from "../../components/Grid/";
 import Success from "./Success";
 import Confirmation from "./Confirmation";
 import Ballotinfo from "./Ballotinfo";
-import AddIssues from "./Addissues";
+import AddIssues2 from "./Addissues2";
 import axios from 'axios';
 import Moment from 'moment';
 //import "./NewUser.css";
 
 const fieldValues = {
-    ballot_name  : null,
-    ballot_start : Moment(),
-    ballot_expiration : Moment().add(1, 'day'),
-    issue_name   : [],
-    options   : []
+  ballot_name  : null,
+  ballot_start : Moment(),
+  ballot_expiration : Moment().add( 1, 'day'),
+  issues: [{
+           issue_name:null,
+           options:[]
+           }],
 }
 
 class AddBallot extends Component {
@@ -23,9 +25,7 @@ class AddBallot extends Component {
 
         this.state = {
             step: 1
-            //  name: null,
-            //  password : null,
-        };
+        };  
     }
 
     handleChange(e) {
@@ -75,29 +75,29 @@ class AddBallot extends Component {
     };*/
 
     renderSwitch = () => {
-        switch (this.state.step) {
-            case 1:
-                return <Ballotinfo   fieldValues={fieldValues}
-                    nextStep={this.nextStep}
-                    previousStep={this.previousStep}
-                    saveValues={this.saveValues} />
-            case 2:
-                return <AddIssues   fieldValues={fieldValues}
-                    nextStep={this.nextStep}
-                    previousStep={this.previousStep}
-                    saveValues={this.saveValues} />
-            case 3:
-                return <Confirmation fieldValues={fieldValues}
-                    previousStep={this.previousStep}
-                    submitRegistration={this.nextStep} />
-            case 4:
-                return <Success fieldValues={fieldValues} />
-
-            default: <Ballotinfo  fieldValues={fieldValues}
-                nextStep={this.nextStep}
-                previousStep={this.previousStep}
-                saveValues={this.saveValues} />
-        }
+      switch (this.state.step) {
+       case 1:
+       return <Ballotinfo   fieldValues={fieldValues}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
+                            saveValues={this.saveValues} />
+      case 2:
+        return <AddIssues2   fieldValues={fieldValues}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
+                            saveValues={this.saveValues} />
+      case 3:
+        return <Confirmation fieldValues={fieldValues}
+                             previousStep={this.previousStep}
+                             submitRegistration={this.nextStep} />
+      case 4:
+        return <Success fieldValues={fieldValues} />
+      
+      default: <Ballotinfo  fieldValues={fieldValues}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
+                            saveValues={this.saveValues} />
+      }
     };
 
     render(){
