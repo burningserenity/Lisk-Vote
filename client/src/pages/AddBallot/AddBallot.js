@@ -19,7 +19,7 @@ const fieldValues = {
 }
 
 class AddBallot extends Component {
-    
+
     constructor() {
         super();
 
@@ -27,7 +27,7 @@ class AddBallot extends Component {
             step: 1
         };  
     }
-       
+
     handleChange(e) {
         let prop = e.target.id;
         let change = {};
@@ -38,41 +38,41 @@ class AddBallot extends Component {
 
 
     saveValues = (field_Value) => {
-    return function() {
-      const fieldValues = Object.assign({}, fieldValues, field_Value);
-    }
+        return function() {
+            const fieldValues = Object.assign({}, fieldValues, field_Value);
+        }
 
-   };
+    };
 
     nextStep = () => {
         this.setState({
-           step : this.state.step +1
+            step : this.state.step +1
         });
     };
 
     previousStep = () => {
         this.setState({
-           step : this.state.step -1
+            step : this.state.step -1
         });
     };
 
-   
-    SubmitRegistration = () => {
-    console.log("Me llamaron");
-    console.log(this.props.fieldValues);
-    if (this.props.fieldValues) {
+
+    /*SubmitRegistration = () => {
+        console.log("Me llamaron");
         console.log(this.props.fieldValues);
-         axios({
-            method: 'post',
-            url: `/api/ballots/register/`,
-            data: {
-                ballot_name: this.props.fieldValues.ballot_name,
-            }
-        }).then(() => {
-            this.nextStep();
-        });
-     }
-    };
+        if (this.props.fieldValues) {
+            console.log(this.props.fieldValues);
+            axios({
+                method: 'post',
+                url: `/api/ballots`,
+                data: {
+                    ballot_name: this.props.fieldValues.ballot_name,
+                }
+            }).then(() => {
+                this.nextStep();
+            });
+        }
+    };*/
 
     renderSwitch = () => {
       switch (this.state.step) {
@@ -102,19 +102,19 @@ class AddBallot extends Component {
 
     render(){
 
-      const style = {
-          width : (this.state.step / 4 * 100) + '%'
-      }
-      
-      return (
+        const style = {
+            width : (this.state.step / 4 * 100) + '%'
+        }
+
+        return (
             <Container>
-              <h1>Adding a New Ballot</h1>
-            <span className="progress-step">Step {this.state.step}</span>
-            <progress className="progress" style={style}></progress>
-            {this.renderSwitch()}
+                <h1>Adding a New Ballot</h1>
+                <span className="progress-step">Step {this.state.step}</span>
+                <progress className="progress" style={style}></progress>
+                {this.renderSwitch()}
             </Container> 
-      
-         );
+
+        );
     }
 }
 

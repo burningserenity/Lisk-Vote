@@ -82,17 +82,21 @@ class VoterRegistration extends Component {
                 </Col>
              </Row>
              <Row>
-               <Col size="md-5.5" style={styles.registration.regCard} centered>
-                 <h2>Select a Ballots to Register Voters:</h2>
+               <Col size="md-6 centered" style={styles.registration.regCard}>
+                 <h2>Select a Ballot to Register Voters for:</h2>
                     {this.state.ballots ? (
                       <ListGroup>
                         {this.state.ballots.map(ballot => (
                            <ListGroupItem key={ballot.id}>
-                                <strong>
-                                   Ballot Name/Topic: {ballot.ballot_name} <br/> Ballot Expires: {ballot.ballot_expiration}
-                                 </strong>
+                           <Row>
+                           <Col size="md-9">
+                                   <strong style={styles.registration.strongText}>Ballot Name/Topic:</strong> {ballot.ballot_name} <br/> <strong style={styles.registration.strongText}>Ballot Expires: </strong>{ballot.ballot_expiration}
+                            </Col>
+                            <Col size='md-3'>
                                  <Checkbtn onClick={() => this.loadVoters({ballot : ballot.id})}>
                                  </Checkbtn>
+                                 </Col>
+                                 </Row>
                            </ListGroupItem>
 
                         ))}
@@ -101,8 +105,8 @@ class VoterRegistration extends Component {
                         <h3>No Results to Display</h3>
                     )}
                </Col>
-               <Col size="md-5.5" style={styles.registration.regCard} centered>
-                 <h2>Select Voters for Ballot:</h2>
+               <Col size="md-6 centered" style={styles.registration.regCard}>
+                 <h2>Select a Voter to Register for a Ballot:</h2>
                  {this.state.Voter ? (
                      <FormControl componentClass="select" onChange={this.handleSelect.bind(this)} name="FormControl">
                       {this.state.Voter.map((Voter) => {
@@ -114,7 +118,7 @@ class VoterRegistration extends Component {
                     <h3>No Voters</h3>
                  )}
                </Col>
-               <Col size="md-11" style={{ marginTop: '10px' }}>
+               <Col size="md-11 centered" style={{ marginTop: '10px' }}>
                  <JumboBtn
                    disabled={!(this.state.FormControl)}
                    onClick={this.handleFormSubmit}>
@@ -129,10 +133,11 @@ class VoterRegistration extends Component {
 const styles = {
     registration: {
         regCard: {
-          marginLeft: '5px',
             backgroundColor: 'rgba(30, 30, 30, .65)',
             padding: '30px'
-
+        },
+        strongText: {
+          color: '#18ffe7'
         }
     }
 }

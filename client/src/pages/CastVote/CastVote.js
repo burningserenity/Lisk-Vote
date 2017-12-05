@@ -38,23 +38,17 @@ class CastVote extends Component {
         if (positionsArr.length > 0) {
             console.log('positions: ' + JSON.stringify(positionsArr, null, 2));
             positionsArr.forEach((position, i) => {
-                console.log(`does ${position.issue} equal ${prop.issue} ?`);
                 if (position.issue === prop.issue) {
-                    console.log(`i == ${i}`);
                     positionsArr.splice(positionsArr[i], 1);
                 }
             });
-            console.log(JSON.stringify(prop, null, 2));
             positionsArr.push(prop);
             this.setState({positions: positionsArr});
             console.log(this.state.positions);
         }
         else {
-            console.log('prop: ' + JSON.stringify(prop.issue, null, 2));
             positionsArr.push(prop);
             this.setState({positions: positionsArr});
-            console.log('positions: ' + JSON.stringify(positionsArr, null, 2));
-            console.log(this.state.positions[0].issue);
         }
     };
 
@@ -66,15 +60,8 @@ class CastVote extends Component {
         let positionOnly = positionArr.map(position => {
             return position.position
         });
-        axios({
-            method: 'put',
-            url: `/api/ballots/vote/${this.state.ballot[0].id}`,
-            data: {
-                voter_id: this.state.voter_id,
-                position: positionOnly
-            }
-        }).then(() => {
-            window.location.href = `/registeredvotes/${this.state.voter_id}`;
+        API.castVote(`/api/ballots/vote/${this.state.ballot[0].id}`, this.state.voter_id, positionOnly).then(() => {
+            window.location.href = `/voteresults/${this.state.ballot[0].id}`;
         });
     };
 
@@ -82,7 +69,8 @@ class CastVote extends Component {
         return(
             <Container>
                 <Row>
-                    <Col size="md-6 centered">
+
+                    <Col size="md-8 centered">
                     <h2 style={styles.ballotCards.heading}>Please Select One Option <br /> for Each Issue</h2>
                         {this.state.ballot.length > 0 &&
                                 <div style={styles.ballotCards.bCard}>
@@ -92,6 +80,7 @@ class CastVote extends Component {
                         }
                     </Col>
                 </Row>
+
             </Container>
         );
     }
@@ -107,7 +96,11 @@ const styles = {
             textAlign: 'center',
             backgroundColor: 'rgba(30, 30, 30, .65)',
             marginTop: '10px',
-            padding: '10px'
+            padding: '10px',
+            border: 'solid',
+            borderColor: '#3498DB',
+            borderWidth: '1px',
+            borderRadius: '0.25rem'
         }
     }
 }
