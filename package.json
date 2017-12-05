@@ -4,8 +4,8 @@
   "description": "Anonymous voting to be used with the Lisk SDK",
   "main": "index.js",
   "scripts": {
-    "server": "node server.js",
-    "start": "node server.js",
+    "server": "nodemon server.js",
+    "start": "concurrently \"npm run server\" \"cd client && npm start\"",
     "client": "concurrently \"npm run server\" \"cd client && npm start\""
   },
   "keywords": [

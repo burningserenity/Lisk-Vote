@@ -7,7 +7,7 @@ export const FormBtn = props =>
   </button>;
 
 export const Checkbtn = props => (
-  <span className="btn-outline-success" style = {{float : "right"}} {...props}>
+  <span className="btn-outline-success" style = {{float : "right", fontSize: "30px"}} {...props}>
     ✓
   </span>
 );
