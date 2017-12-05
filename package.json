@@ -4,8 +4,9 @@
   "description": "Anonymous voting to be used with the Lisk SDK",
   "main": "index.js",
   "scripts": {
-    "server": "node server.js",
-    "start": "concurrently \"npm run server\" \"cd client && npm start\""
+    "server": "nodemon server.js",
+    "start": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "client": "concurrently \"npm run server\" \"cd client && npm start\""
   },
   "keywords": [
     "lisk",
@@ -32,14 +33,16 @@
     "pg-hstore": "^2.3.2",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",
-    "react-chartjs-2": "^2.6.4",
-    "react-dom": "^16.2.0",
     "react-chartjs": "^0.8.0",
+    "react-chartjs-2": "^2.6.4",
+    "react-datepicker": "^0.61.0",
+    "react-dom": "^16.2.0",
     "react-easy-chart": "^0.3.0",
     "react-faux-dom": "^4.1.0",
     "react-router": "^4.2.0",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
     "sequelize": "^4.22.6"
   }
 }
