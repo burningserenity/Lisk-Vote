@@ -23,7 +23,7 @@ const ballot_routes = require("./routes/ballot_routes.js");
 const issue_routes = require("./routes/issue_routes.js");
 const position_routes = require("./routes/position_routes.js");
 
-app.use("/", voter_routes, ballot_routes, issue_routes);
+app.use("/", voter_routes, ballot_routes, issue_routes, position_routes);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname,'./client/build/index.html'));
