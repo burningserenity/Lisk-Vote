@@ -56,24 +56,6 @@ class AddBallot extends Component {
         });
     };
 
-
-    /*SubmitRegistration = () => {
-        console.log("Me llamaron");
-        console.log(this.props.fieldValues);
-        if (this.props.fieldValues) {
-            console.log(this.props.fieldValues);
-            axios({
-                method: 'post',
-                url: `/api/ballots`,
-                data: {
-                    ballot_name: this.props.fieldValues.ballot_name,
-                }
-            }).then(() => {
-                this.nextStep();
-            });
-        }
-    };*/
-
     renderSwitch = () => {
       switch (this.state.step) {
        case 1:

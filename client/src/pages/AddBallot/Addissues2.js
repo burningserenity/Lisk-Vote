@@ -10,7 +10,7 @@ class AddIssues2 extends Component {
             submitted2: false,
             issues:[],
             issues_Values:[],
-            follow:false
+            follow: false
          };
     }
   

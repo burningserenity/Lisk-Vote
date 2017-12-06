@@ -21,3 +21,10 @@
 2017-11-28 21:23:33.981 EST [4469] LOG:  received SIGHUP, reloading configuration files
 2017-11-28 21:23:33.982 EST [4471] LOG:  shutting down
 2017-11-28 21:23:34.057 EST [4469] LOG:  database system is shut down
+2017-12-05 18:51:27.911 EST [3931] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-12-05 18:51:27.915 EST [3931] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2017-12-05 18:51:27.945 EST [3932] LOG:  database system was shut down at 2017-12-05 15:57:52 EST
+2017-12-05 18:51:27.960 EST [3931] LOG:  database system is ready to accept connections
+2017-12-05 18:54:03.870 EST [4278] ERROR:  duplicate key value violates unique constraint "Voters_voter_passphrase_key"
+2017-12-05 18:54:03.870 EST [4278] DETAIL:  Key (voter_passphrase)=(password) already exists.
+2017-12-05 18:54:03.870 EST [4278] STATEMENT:  INSERT INTO "Voters" ("id","voter_address","voter_passphrase","voter_stake","voter_firstName","voter_lastName","voter_email","createdAt","updatedAt") VALUES (DEFAULT,'100000000000004L','password',1,'Nick','C','fihedfjiow','2017-12-05 23:54:03.868 +00:00','2017-12-05 23:54:03.868 +00:00') RETURNING *;

@@ -47,7 +47,6 @@ class AddIssues2 extends Component {
       options : this.state.option
     }  
     console.log(data);
-    this.props.saveissues(data) 
   };
 
 
