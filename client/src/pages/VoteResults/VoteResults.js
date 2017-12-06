@@ -85,17 +85,17 @@ class VoteResults extends Component {
             <div className="card text-center" style={styles.card}>
                     {this.state.ballot.length ? (
                 <div className="card-header" style={styles.header}>
-                        Results of {this.state.ballot[0].ballot_name}
+                        <h2>Results of {this.state.ballot[0].ballot_name} Ballot:</h2>
                 </div> ) : (
                 <div className="card-header" style={styles.header}>
                     Loading
                 </div>)}
             {this.state.chartArr.length ? (
                 <div>
-                    {this.state.chartArr.map(chart => 
+                    {this.state.chartArr.map(chart =>
                         (
                             <div>
-                                <h6>{this.state.issue_nameArray[this.state.chartArr.indexOf(chart)]}</h6>
+                                <h3 style={styles.subheader}>{this.state.issue_nameArray[this.state.chartArr.indexOf(chart)]}</h3>
                                 <Doughnut key={chart.id} data={chart}/>
                             </div>
                     ))}
@@ -132,11 +132,17 @@ class VoteResults extends Component {
 
 const styles = {
     card: {
-        backgroundColor: 'rgba(30, 30, 30, .65)'
+        backgroundColor: 'rgba(30, 30, 30, .55)'
     },
     header: {
-        backgroundColor: 'rgba(30, 30, 30, .85)',
-        fontSize: '30px'
+        marginTop: '10px',
+        padding: '20px',
+        backgroundColor: 'rgba(30, 30, 30, .75)',
+        fontSize: '30px',
+        color: '#18ffe7'
+    },
+    subheader: {
+        marginTop: '20px'
     }
 }
 
