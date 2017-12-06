@@ -6,10 +6,10 @@ const Issue = props =>
     <div className="card border-info" style={styles.voteCard.spacing}>
         {props.issue &&
             <div>
-            <h3 className="card-header">{props.ballot_name}
+            <h3 className="card-header" style={styles.voteCard.heading}>{props.ballot_name}
             </h3>
-               <strong style={styles.voteCard.text2}>Issue Title: </strong>
-                <p style={styles.voteCard.text}>{props.issue.issue_name}</p>
+               <strong style={styles.voteCard.text2}>Issue Title:  </strong>
+                <strong style={styles.voteCard.text}>{props.issue.issue_name}</strong>
                 <hr style={styles.voteCard.line} />
                 <FormGroup>
                 <strong style={styles.voteCard.text2}>Options: </strong>
@@ -36,7 +36,6 @@ const Issue = props =>
             },
             text2: {
                 fontSize: '20px',
-                textDecoration: 'underline'
             },
             text3: {
                 fontSize: '16px'
@@ -48,6 +47,9 @@ const Issue = props =>
                     height: '10px',
                     border: '0',
                     boxShadow: '0 10px 10px -10px #8c8b8b inset'
+            },
+            heading: {
+                backgroundColor: 'rgba(109, 105, 105, .15)'
             }
         }
     }
