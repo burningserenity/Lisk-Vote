@@ -38,7 +38,7 @@ class NewUser extends Component {
         if (this.state.voter_firstName && this.state.voter_lastName && this.state.voter_passphrase && this.state.voter_email) {
             let submitArr = [this.state.voter_firstName, this.state.voter_lastName, this.state.voter_passphrase, this.state.voter_email];
             console.log(submitArr);
-            axios.post('/api/voters', {firstName: submitArr[0], lastName: submitArr[1], passphrase: submitArr[2], email: submitArr[3]}).then(() => window.location.href = '/openvotes')
+            axios.post('/api/voters', {firstName: submitArr[0], lastName: submitArr[1], passphrase: submitArr[2], email: submitArr[3]}).then(() => window.location.href = '/')
               .catch(err => console.log(err));
         }
     };
