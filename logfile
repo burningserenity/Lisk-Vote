@@ -28,3 +28,13 @@
 2017-12-05 18:54:03.870 EST [4278] ERROR:  duplicate key value violates unique constraint "Voters_voter_passphrase_key"
 2017-12-05 18:54:03.870 EST [4278] DETAIL:  Key (voter_passphrase)=(password) already exists.
 2017-12-05 18:54:03.870 EST [4278] STATEMENT:  INSERT INTO "Voters" ("id","voter_address","voter_passphrase","voter_stake","voter_firstName","voter_lastName","voter_email","createdAt","updatedAt") VALUES (DEFAULT,'100000000000004L','password',1,'Nick','C','fihedfjiow','2017-12-05 23:54:03.868 +00:00','2017-12-05 23:54:03.868 +00:00') RETURNING *;
+2017-12-05 20:51:59.754 EST [3931] LOG:  received smart shutdown request
+2017-12-05 20:51:59.779 EST [3931] LOG:  worker process: logical replication launcher (PID 3938) exited with exit code 1
+2017-12-05 20:51:59.779 EST [3931] LOG:  received SIGHUP, reloading configuration files
+2017-12-05 20:51:59.780 EST [3933] LOG:  shutting down
+2017-12-05 20:51:59.832 EST [3931] LOG:  database system is shut down
+2017-12-06 11:37:50.062 EST [12181] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-12-06 11:37:50.066 EST [12181] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2017-12-06 11:37:50.089 EST [12182] LOG:  database system was shut down at 2017-12-05 20:51:59 EST
+2017-12-06 11:37:50.097 EST [12181] LOG:  database system is ready to accept connections
+2017-12-06 11:37:52.729 EST [12269] FATAL:  role "root" does not exist

@@ -110,7 +110,7 @@ class VoterRegistration extends Component {
                  {this.state.Voter ? (
                      <FormControl componentClass="select" onChange={this.handleSelect.bind(this)} name="FormControl">
                       {this.state.Voter.map((Voter) => {
-                       return (<option key={Voter.id} value={[Voter.id,this.state.ballotIndex.ballot]}>{this.state.ballotIndex.ballot+' '+Voter.voter_address+' '+Voter.voter_firstName+' '+Voter.voter_firstName}</option>)
+                       return (<option key={Voter.id} value={[Voter.id,this.state.ballotIndex.ballot]}>{this.state.ballotIndex.ballot+' '+Voter.voter_address+' '+Voter.voter_firstName+' '+Voter.voter_lastName}</option>)
                     })
                    }
                    </FormControl>
