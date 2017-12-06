@@ -7,6 +7,7 @@ const position = require("../models").Position;
 router.post("/api/positions", (req, res) => {
     position.create({
         position_name: req.body.position_name,
+        ballot_id: req.body.ballot_id,
         issue_id: req.body.issue_id
     }).then(dbPosition => {
         console.log(dbPosition);

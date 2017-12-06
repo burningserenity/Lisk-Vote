@@ -13,12 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}
-else {
-    app.use(express.static('client/public'));
-}
+app.use(express.static('./client/build'));
 
 app.use(methodOverride("_method"));
 
@@ -26,11 +21,12 @@ const db = require("./models");
 const voter_routes = require("./routes/voter_routes.js");
 const ballot_routes = require("./routes/ballot_routes.js");
 const issue_routes = require("./routes/issue_routes.js");
+const position_routes = require("./routes/position_routes.js");
 
-app.use("/", voter_routes, ballot_routes, issue_routes);
+app.use("/", voter_routes, ballot_routes, issue_routes, position_routes);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
+    res.sendFile(path.join(__dirname,'./client/build/index.html'));
 });
 
 console.log(`Listening on port ${port}...`);

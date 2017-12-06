@@ -63,15 +63,13 @@ router.get("/api/voters?addr=:address", (req, res) => {
 // Add a voter
 router.post("/api/voters", (req, res) => {
     let voterList = [];
+    let address = "";
     voter.findAll().then(dbList => {
-        console.log(JSON.stringify(dbList, null, 2));
         voterList = dbList.map((voter) => {
             return voter.voter_address;
         });
-        console.log(voterList);
-        console.log(req.body);
-        console.log( 'last element: ' + (parseInt((voterList[voterList.length - 1].split("")).slice(0, -1).join("")) + parseInt(1)) + 'L');
-        let address = (parseInt((voterList[voterList.length - 1].split("")).slice(0, -1).join("")) + parseInt(1)) + 'L';
+        voterList.length < 1 ? address = '100000000000000L' :
+            address = (parseInt((voterList[voterList.length - 1].split("")).slice(0, -1).join("")) + parseInt(1)) + 'L';
         console.log(address);
         voter.create({
             voter_address: address,
