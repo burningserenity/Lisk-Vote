@@ -16,7 +16,8 @@ class CastVote extends Component {
     loadBallot = () => {
         API.getBallot(this.props.match.params.id)
             .then( res => {
-                this.setState({ballot: [res.data]});
+                this.setState({ballot: res.data ? [res.data] : []});
+                console.log(this.state.ballot);
             })
             .catch(err => console.log(err));
     };
@@ -72,12 +73,12 @@ class CastVote extends Component {
 
                     <Col size="md-8 centered">
                     <h2 style={styles.ballotCards.heading}>Please Select One Option <br /> for Each Issue</h2>
-                        {this.state.ballot.length > 0 &&
-                                <div style={styles.ballotCards.bCard}>
+                        {this.state.ballot.length ? (
+                             <div style={styles.ballotCards.bCard}>
                                 <BallotCard ballot={this.state.ballot} issues={this.state.ballot[0].Issues} handleChange={this.handleChange} />
                                 <BallotBtn handleFormSubmit={this.handleFormSubmit}/>
                             </div>
-                        }
+                        ): (<p>No Ballots have been assigned</p>)}
                     </Col>
                 </Row>
 
