@@ -25,7 +25,7 @@ const issue_routes = require("./routes/issue_routes.js");
 app.use("/", voter_routes, ballot_routes, issue_routes);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dir,'./client/build/index.html'));
+    res.sendFile(path.join(__dirname,'./client/build/index.html'));
 });
 
 console.log(`Listening on port ${port}...`);
