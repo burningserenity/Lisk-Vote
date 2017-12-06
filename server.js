@@ -21,6 +21,7 @@ const db = require("./models");
 const voter_routes = require("./routes/voter_routes.js");
 const ballot_routes = require("./routes/ballot_routes.js");
 const issue_routes = require("./routes/issue_routes.js");
+const position_routes = require("./routes/position_routes.js");
 
 app.use("/", voter_routes, ballot_routes, issue_routes);
 
