@@ -54,7 +54,7 @@ class NewUser extends Component {
                     </Jumbotron>
 
 
-                    <Col size="md-8 centered">
+                    <Col size="user-wrap md-8 centered">
                         <form align="center">
                         <h4 style={styles.headings.h4}>First Name</h4>
                             <Input
