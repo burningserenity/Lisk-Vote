@@ -21,6 +21,7 @@ button {
 	width: 60%;
 }
 
-.btn-info {
-	border-color: ;
+.selected {
+	border-color: yellow;
+	border-width: 3px;
 }

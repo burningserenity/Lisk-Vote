@@ -35,6 +35,13 @@ class CastVote extends Component {
             issue: propArr[0],
             position: propArr[1]
         }
+
+        let buttons = e.target.parentNode.childNodes;
+
+        buttons.forEach(button => button.classList.remove('selected'));
+
+        e.target.classList.add('selected');
+
         if (positionsArr.length > 0) {
             console.log('positions: ' + JSON.stringify(positionsArr, null, 2));
             positionsArr.forEach((position, i) => {
