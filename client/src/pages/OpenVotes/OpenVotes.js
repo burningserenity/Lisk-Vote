@@ -3,7 +3,6 @@ import { Col, Row, Container } from "../../components/Grid/";
 import API from "../../utils/API";
 import "./OpenVotes.css";
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import  { Link } from 'react-router-dom';
 
 
 

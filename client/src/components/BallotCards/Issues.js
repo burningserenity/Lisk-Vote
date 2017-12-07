@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, Radio } from 'react-bootstrap';
+import { FormGroup, Button } from 'react-bootstrap';
 import './BallotCards.css';
 
 const Issue = props =>
@@ -12,10 +12,12 @@ const Issue = props =>
                 <strong style={styles.voteCard.text}>{props.issue.issue_name}</strong>
                 <hr style={styles.voteCard.line} />
                 <FormGroup>
-                <strong style={styles.voteCard.text2}>Options: </strong>
+                <strong style={styles.voteCard.text2}>Select an Option: </strong>
+                <div className="column y-center">
                     {props.issue.Positions.map(position => (
-                        <Radio style={styles.voteCard.text3} key={position.id} name={`radioGroup-${props.issue.id}`} onClick={props.onClick.bind(this)} id={`p-${position.id}`} value={`${props.issue.id},${position.id}`}>{position.position_name}</Radio>
+                        <Button bsStyle="info" style={styles.voteCard.text3} key={position.id} name={props.issue.id} onClick={props.onClick.bind(this)} id={`p-${position.id}`} value={`${props.issue.id},${position.id}`}>{position.position_name}</Button>
                     ))}
+                    </div>
                 </FormGroup>
 
                 <p style={styles.voteCard.text4}>Expires: {props.ballot_expiration}</p>
@@ -35,7 +37,7 @@ const Issue = props =>
                 color: 'aquamarine'
             },
             text2: {
-                fontSize: '20px',
+                fontSize: '25px',
             },
             text3: {
                 fontSize: '16px'

@@ -4,7 +4,6 @@ import Success from "./Success";
 import Confirmation from "./Confirmation";
 import Ballotinfo from "./Ballotinfo";
 import AddIssues2 from "./Addissues2";
-import axios from 'axios';
 import Moment from 'moment';
 //import "./NewUser.css";
 
@@ -25,7 +24,7 @@ class AddBallot extends Component {
 
         this.state = {
             step: 1
-        };  
+        };
     }
 
     handleChange(e) {
@@ -74,7 +73,7 @@ class AddBallot extends Component {
                              submitRegistration={this.nextStep} />
       case 4:
         return <Success fieldValues={fieldValues} />
-      
+
       default: <Ballotinfo  fieldValues={fieldValues}
                             nextStep={this.nextStep}
                             previousStep={this.previousStep}
@@ -94,7 +93,7 @@ class AddBallot extends Component {
                 <span className="progress-step">Step {this.state.step}</span>
                 <progress className="progress" style={style}></progress>
                 {this.renderSwitch()}
-            </Container> 
+            </Container>
 
         );
     }
