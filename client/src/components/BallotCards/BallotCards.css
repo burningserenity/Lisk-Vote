@@ -1,3 +1,26 @@
 input {
 	margin-right: 10px;
 }
+
+.column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.y-center {
+	align-items: center;
+}
+
+.btn {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+button {
+	width: 60%;
+}
+
+.btn-info {
+	border-color: ;
+}
