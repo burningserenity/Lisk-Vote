@@ -38,3 +38,21 @@
 2017-12-06 11:37:50.089 EST [12182] LOG:  database system was shut down at 2017-12-05 20:51:59 EST
 2017-12-06 11:37:50.097 EST [12181] LOG:  database system is ready to accept connections
 2017-12-06 11:37:52.729 EST [12269] FATAL:  role "root" does not exist
+2017-12-06 12:29:18.829 EST [12181] LOG:  worker process: logical replication launcher (PID 12188) exited with exit code 1
+2017-12-06 12:29:18.829 EST [12181] LOG:  received smart shutdown request
+2017-12-06 12:29:18.840 EST [12181] LOG:  received SIGHUP, reloading configuration files
+2017-12-06 12:29:18.841 EST [12183] LOG:  shutting down
+2017-12-06 12:29:18.950 EST [12181] LOG:  database system is shut down
+2017-12-06 15:13:25.867 EST [6514] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-12-06 15:13:25.873 EST [6514] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2017-12-06 15:13:25.900 EST [6515] LOG:  database system was shut down at 2017-12-06 12:29:18 EST
+2017-12-06 15:13:25.910 EST [6514] LOG:  database system is ready to accept connections
+2017-12-06 16:28:32.943 EST [6514] LOG:  received smart shutdown request
+2017-12-06 16:28:32.950 EST [6514] LOG:  worker process: logical replication launcher (PID 6521) exited with exit code 1
+2017-12-06 16:28:32.950 EST [6516] LOG:  shutting down
+2017-12-06 16:28:32.962 EST [6514] LOG:  received SIGHUP, reloading configuration files
+2017-12-06 16:28:33.016 EST [6514] LOG:  database system is shut down
+2017-12-07 00:20:26.302 EST [22226] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-12-07 00:20:26.307 EST [22226] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2017-12-07 00:20:26.333 EST [22227] LOG:  database system was shut down at 2017-12-06 16:28:32 EST
+2017-12-07 00:20:26.345 EST [22226] LOG:  database system is ready to accept connections
