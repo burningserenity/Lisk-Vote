@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Container } from "../../components/Grid/"
-import axios from 'axios';
+import { Col, Row, Container } from "../../components/Grid/";
 import API from "../../utils/API";
 import BallotCard from "../../components/BallotCards/BallotCards";
 import BallotBtn from "../../components/BallotCards/BallotBtn";

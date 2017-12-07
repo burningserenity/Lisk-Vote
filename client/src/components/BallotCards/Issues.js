@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, Radio, Button } from 'react-bootstrap';
+import { FormGroup, Button } from 'react-bootstrap';
 import './BallotCards.css';
 
 const Issue = props =>

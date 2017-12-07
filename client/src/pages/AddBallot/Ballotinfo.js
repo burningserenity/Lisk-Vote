@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Moment from 'moment';
 import DateTimePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import API from "../../utils/API";
 
 class Ballotinfo extends Component {
 constructor() {
@@ -12,7 +11,7 @@ constructor() {
       startDate2: Moment()
     };
     this.handleChange = this.handleChange.bind(this);
-}    
+}
 
  componentDidMount() {
         this.setState({startDate:this.props.fieldValues.ballot_start});
